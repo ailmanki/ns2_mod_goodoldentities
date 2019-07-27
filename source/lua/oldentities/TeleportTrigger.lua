@@ -82,7 +82,10 @@ function TeleportTrigger:OnInitialized()
     
 end
 
-function TeleportTrigger:OnTriggerEntered(enterEnt, triggerEnt)
+---OnTriggerEntered
+---@param enterEnt table
+---@param _ table triggerEnt
+function TeleportTrigger:OnTriggerEntered(enterEnt, _)
 
     if self.enabled then
          self:TeleportEntity(enterEnt)
@@ -101,7 +104,9 @@ end
 
 
 -- Addtimedcallback had not worked, so lets search it this way
-function TeleportTrigger:OnUpdate(deltaTime)    
+---OnUpdate
+---@param _ number deltaTime
+function TeleportTrigger:OnUpdate(_)
     self:TeleportAllInTrigger()    
 end
 

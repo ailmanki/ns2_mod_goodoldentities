@@ -161,6 +161,6 @@ function LogicMixin:OnTriggerAction()
         self.enabled = true
     elseif self.onTriggerAction == 2 then
         -- stay off
-        self.enabled = off
+        self.enabled = false
     end  
 end

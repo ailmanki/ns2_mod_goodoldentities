@@ -1,12 +1,12 @@
--- ________________________________
--- 
---    	NS2 CustomEntitesMod   
--- 	Made by JimWest 2012
--- 
--- ________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
---  GravityTrigger.lua
---  Entity for mappers to create teleporters
+-- GravityTrigger.lua
+-- Entity for mappers to create teleporters
 
 Script.Load("lua/oldentities/LogicMixin.lua")
 
@@ -24,23 +24,23 @@ AddMixinNetworkVars(LogicMixin, networkVars)
 
 
 function GravityTrigger:OnCreate()
- 
-    Trigger.OnCreate(self)  
-    
+
+    Trigger.OnCreate(self)
+
 end
 
 function GravityTrigger:OnInitialized()
 
-    Trigger.OnInitialized(self) 
+    Trigger.OnInitialized(self)
     if Server then
-        InitMixin(self, LogicMixin)   
-        self:SetUpdates(true)  
+        InitMixin(self, LogicMixin)
+        self:SetUpdates(true)
     end
-    self:SetTriggerCollisionEnabled(true) 
-    
+    self:SetTriggerCollisionEnabled(true)
+
 end
 
-function GravityTrigger:GetGravityOverride(gravity) 
+function GravityTrigger:GetGravityOverride(gravity)
     if self.enabled then
         return self.gravityForce
     else
@@ -51,20 +51,20 @@ end
 function GravityTrigger:OnUpdate(deltaTime)
 end
 
-function GravityTrigger:OnTriggerEntered(enterEnt, triggerEnt) 
+function GravityTrigger:OnTriggerEntered(enterEnt, triggerEnt)
     if self.enabled then
         enterEnt.gravityTrigger = self:GetId()
-        
+
         enterEnt.timeOfLastJump = Shared.GetTime()
         enterEnt.onGroundNeedsUpdate = true
         enterEnt.jumping = true
     end
 end
-    
+
 function GravityTrigger:OnTriggerExited(exitEnt, triggerEnt)
     if self.enabled then
         exitEnt.gravityTrigger = 0
-        
+
         exitEnt.onGroundNeedsUpdate = true
         exitEnt.jumping = false
     end
@@ -72,7 +72,7 @@ end
 
 
 function GravityTrigger:OnLogicTrigger()
-	self:OnTriggerAction()
+    self:OnTriggerAction()
 end
 
 

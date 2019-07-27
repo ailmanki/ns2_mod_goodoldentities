@@ -1,14 +1,14 @@
--- ________________________________
--- 
---    	NS2 CustomEntitesMod   
--- 	Made by JimWest 2012
--- 
--- ________________________________
+//________________________________
+//
+//   	NS2 CustomEntitesMod   
+//	Made by JimWest 2012
+//
+//________________________________
 
---  TeleportTrigger.lua
---  Entity for mappers to create teleporters
+// TeleportTrigger.lua
+// Entity for mappers to create teleporters
 
-Script.Load("lua/oldentities/LogicMixin.lua")
+Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
 class 'TeleportTrigger' (Trigger)
 
@@ -24,8 +24,8 @@ local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords, c
 
     local viewCoords = player:GetViewCoords()
     
-    --  If we're going through the backside of the phase gate, orient us
-    --  so we go out of the front side of the other gate.
+    // If we're going through the backside of the phase gate, orient us
+    // so we go out of the front side of the other gate.
     if Math.DotProduct(viewCoords.zAxis, srcCoords.zAxis) < 0 then
     
         srcCoords.zAxis = -srcCoords.zAxis
@@ -33,7 +33,7 @@ local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords, c
         
     end
     
-    --  Redirect player velocity relative to gates
+    // Redirect player velocity relative to gates
     local invSrcCoords = srcCoords:GetInverse()
     local invVel = invSrcCoords:TransformVector(player:GetVelocity())
     
@@ -44,7 +44,7 @@ local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords, c
     local newVelocity = dstCoords:TransformVector(invVel)
     player:SetVelocity(newVelocity)
     
-     viewCoords = dstCoords * (invSrcCoords * viewCoords)
+    local viewCoords = dstCoords * (invSrcCoords * viewCoords)
     local viewAngles = Angles()
     viewAngles:BuildFromCoords(viewCoords)
     
@@ -54,12 +54,12 @@ end
 
 
 function TeleportTrigger:OnCreate()
-
-    Trigger.OnCreate(self)
+ 
+    Trigger.OnCreate(self)       
     if Server then
-        self:SetUpdates(true)
+        self:SetUpdates(true)  
     end
-
+    
 end
 
 function TeleportTrigger:OnInitialized()
@@ -75,17 +75,14 @@ function TeleportTrigger:OnInitialized()
             Print("Error: TeleportTrigger " .. self.name .. " has no destination")
             DestroyEntity(self)
         end  
-        --  call it here so we got the correct enabled value
+        // call it here so we got the correct enabled value
         self.searchedEntities = false
         InitMixin(self, LogicMixin)     
     end 
     
 end
 
----OnTriggerEntered
----@param enterEnt table
----@param _ table triggerEnt
-function TeleportTrigger:OnTriggerEntered(enterEnt, _)
+function TeleportTrigger:OnTriggerEntered(enterEnt, triggerEnt)
 
     if self.enabled then
          self:TeleportEntity(enterEnt)
@@ -103,10 +100,8 @@ function TeleportTrigger:SetDestination(newDestinationId)
 end
 
 
--- Addtimedcallback had not worked, so lets search it this way
----OnUpdate
----@param _ number deltaTime
-function TeleportTrigger:OnUpdate(_)
+//Addtimedcallback had not worked, so lets search it this way
+function TeleportTrigger:OnUpdate(deltaTime)    
     self:TeleportAllInTrigger()    
 end
 
@@ -114,7 +109,7 @@ end
 function TeleportTrigger:FindEntitys()
 
     if Server then
-        --  when the 2nd teleportrigger isnt loaded by the engine, this will be called a 2nd. time with the OnUpdate function
+        // when the 2nd teleportrigger isnt loaded by the engine, this will be called a 2nd. time with the OnUpdate function
         for _, trigger in ientitylist(Shared.GetEntitiesWithClassname("TeleportTrigger")) do
             if trigger.name == self.destination then
                 self.destinationId = trigger:GetId()                
@@ -129,8 +124,8 @@ end
 
 function TeleportTrigger:TeleportEntity(entity)
 
-    --  only teleport players
-    if Server and entity:isa("Player") then
+    // only teleport players
+    if Server and entity:isa("Player") then        
         if self.enabled then
         
             if not self.teamNumber or self.teamNumber == 0 or (self.teamNumber ~= 0 and entity:GetTeamNumber() == self.teamNumber) then
@@ -144,15 +139,15 @@ function TeleportTrigger:TeleportEntity(entity)
                         local antiStuckVector = Vector(0,0,0)
                         
                         entity.timeOfLastPhase = time  
-                        --  that the sound is also getting played for aliens
+                        // that the sound is also getting played for aliens
                         entity:TriggerEffects("teleport", {classname = "Marine"})  
                         
                         TransformPlayerCoordsForPhaseGate(entity, self:GetCoords(), destinationEntity:GetCoords(), self.clearVelocity)
                         
-                        --  make sure nothing blocks us
+                        // make sure nothing blocks us
                         local teleportPointBlocked = Shared.CollideCapsule(destOrigin, extents.y, math.max(extents.x, extents.z), CollisionRep.Default, PhysicsMask.AllButPCs, nil)
                         if teleportPointBlocked then
-                            --  move it a bit so we're not getting blocked
+                            // move it a bit so we're not getting blocked
                             antiStuckVector.z = math.cos(destAnlges.yaw)
                             antiStuckVector.x = math.sin(destAnlges.yaw)
                             antiStuckVector.y = 0.5
@@ -163,10 +158,10 @@ function TeleportTrigger:TeleportEntity(entity)
                 else
                     if not self.exitonly then
                         if not self.searchedEntities then 
-                            --  find the entitie once
+                            // find the entitie once
                             self:FindEntitys()
                             self.searchedEntities = true
-                            --  call it again
+                            // call it again
                             self:TeleportEntity(entity)
                         else
                             Print("Error: TeleportTrigger " .. self.name .. " destination not found")
@@ -176,7 +171,7 @@ function TeleportTrigger:TeleportEntity(entity)
                     end
                 end
             end            
-        --  Just do nothing if the teleporter isn't enabled (exit only)
+        // Just do nothing if the teleporter isn't enabled (exit only)
         
         end
     end
