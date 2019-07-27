@@ -168,19 +168,19 @@ function NpcMixin:FilterTarget()
                 -- dont attack power points or team members
                 return target:GetCanTakeDamage() and not target:isa("PowerPoint") and not GetWallBetween(GetEntityEyePos(attacker), targetPosition, target)
                 
-                    /*
+                    --[[
                     local minePos = self:GetEngagementPoint()
                     local weapon = self:GetActiveWeapon()
                     if weapon then
                         minePos = weapon:GetEngagementPoint()
                     end
                     local targetPos = target:GetEngagementPoint()
-                    
+
                     -- Make sure we can see target
                     local filter = EntityFilterAll()
                     local trace = Shared.TraceRay(minePos, targetPos , CollisionRep.Damage, PhysicsMask.Bullets, filter)
                     return ((trace.entity == target) or not GetWallBetween(minePos, targetPos, target) or GetCanSeeEntity(self, target))
-                    */
+                    ]]
             end
             
 end

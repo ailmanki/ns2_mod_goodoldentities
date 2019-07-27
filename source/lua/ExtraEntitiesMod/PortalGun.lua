@@ -160,9 +160,7 @@ function PortalGun:OnSecondaryAttackEnd(player)
 end
 
 
-/**
- * Fires the specified number of bullets in a cone from the player's current view.
- */
+---Fires the specified number of bullets in a cone from the player's current view.
 function PortalGun:FirePortal(player, type)
 
     PROFILE("FirePortal")
@@ -253,7 +251,7 @@ function PortalGun:GetHasSecondary(player)
     return true
 end
 
-/*
+--[[
 function PortalGun:OnTag(tagName)
 
     PROFILE("PortalGun:OnTag")
@@ -275,9 +273,9 @@ function PortalGun:OnTag(tagName)
     end
     
 end
-*/
+]]
 
-/*
+--[[
 function PortalGun:OnUpdateAnimationInput(modelMixin)
 
     PROFILE("PortalGun:OnUpdateAnimationInput")
@@ -314,6 +312,7 @@ function PortalGun:OnUpdateAnimationInput(modelMixin)
     modelMixin:SetAnimationInput("gl", true)
 
 end
-*/
+]]
+
 
 Shared.LinkClassToMap("PortalGun", PortalGun.kMapName, networkVars)

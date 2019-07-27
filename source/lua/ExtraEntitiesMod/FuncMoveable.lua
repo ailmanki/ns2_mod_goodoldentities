@@ -77,7 +77,6 @@ local function UpdateAutoOpen(self, timePassed)
 end
 
 function FuncMoveable:OnCreate()
-		self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
     ScriptActor.OnCreate(self)
     
     InitMixin(self, BaseModelMixin)

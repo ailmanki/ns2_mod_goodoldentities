@@ -1,51 +1,64 @@
-----________________________________
-----
-----   	NS2 CustomEntitesMod
-----	Made by JimWest 2012
-----
-----________________________________
+--________________________________
 --
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
 --
---ScaleModelMixin = CreateMixin(ScaleModelMixin)
---ScaleModelMixin.type = "ScaleModel"
---
---ScaleModelMixin.networkVars =
---{
---    scale = "vector"
---}
---
---function ScaleModelMixin:__initmixin()
---	if not self.scale or not type(self.scale) == "cdata" or not self.scale:isa("Vector") then
---		self.scale = Vector(1, 1, 1)
---	end
---end
---
---function ScaleModelMixin:GetModelScale()
---    return self.scale
---end
---
---function ScaleModelMixin:SetModelScale(newScale)
---	if newScale and type(newScale) == "cdata" and newScale:isa("Vector") then
---		self.scale = newScale
---	end
---end
---
---function ScaleModelMixin:GetModelExtentsVector()
---	local extents = Vector(1, 1, 1)
---	local _, e = self:GetModelExtents()
---	if e then
---		extents = e
---	end
---	return extents
---end
---
---function ScaleModelMixin:OnAdjustModelCoords(modelCoords)
---    local coords = modelCoords
---    if self.scale and coords then
---        coords.xAxis = coords.xAxis * self.scale.x
---        coords.yAxis = coords.yAxis * self.scale.y
---        coords.zAxis = coords.zAxis * self.scale.z
---    end
---    return coords
---
---end
+--________________________________
+
+Script.Load("lua/FunctionContracts.lua")
+Script.Load("lua/PathingUtility.lua")
+
+ScaledModelMixin = CreateMixin( ScaledModelMixin )
+ScaledModelMixin.type = "ScaledModel"
+
+ScaledModelMixin.expectedMixins =
+{
+}
+
+ScaledModelMixin.expectedCallbacks =
+{
+}
+
+
+ScaledModelMixin.optionalCallbacks =
+{
+}
+
+
+ScaledModelMixin.networkVars =  
+{
+}
+
+-- create a model if theres a model value
+function ScaledModelMixin:__initmixin() 
+end
+
+
+function ScaledModelMixin:SetScaledModel(model, animationGraph)
+    if model ~= nil then    
+        Shared.PrecacheModel(model)    
+        --local graphName = string.gsub(model, ".model", ".animation_graph")
+        --if graphName then
+        --    Shared.PrecacheAnimationGraph(graphName)
+        --end
+		if animationGraph then
+			self:SetModel(model, animationGraph)  
+		else
+			self:SetModel(model)
+		end
+    end
+end
+
+
+-- only way to scale the model
+function ScaledModelMixin:OnAdjustModelCoords(modelCoords)
+
+    local coords = modelCoords
+    if self.scale and self.scale:GetLength() ~= 0 then
+        coords.xAxis = coords.xAxis * self.scale.x
+        coords.yAxis = coords.yAxis * self.scale.y
+        coords.zAxis = coords.zAxis * self.scale.z
+    end
+    return coords
+    
+end

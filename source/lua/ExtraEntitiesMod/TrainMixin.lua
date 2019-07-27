@@ -78,8 +78,8 @@ function TrainMixin:OnInitialized()
     self.savedAngles = Angles(self:GetAngles())
         
     if Server then
-		self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
         InitMixin(self, ControllerMixin)
+        self:CreateController(PhysicsGroup.WhipGroup)
         -- set a box so it can be triggered, use the trigger scale from the mapEditor
         if self:GetPushPlayers() then
             self:MoveTrigger()        
@@ -227,7 +227,8 @@ end
 
     
 function TrainMixin:MoveTrigger()
-    /*
+
+    --[[
     local scale = Vector(1,1,1)
     if self.scaleTrigger then
         scale = self.scaleTrigger
@@ -239,7 +240,7 @@ function TrainMixin:MoveTrigger()
     end
     self:SetBox(scale)
     self:SetTriggerCollisionEnabled(true)
-    */
+    ]]
     
     -- make it a bit bigger so were inside the trigger
     local coords = self:GetCoords()

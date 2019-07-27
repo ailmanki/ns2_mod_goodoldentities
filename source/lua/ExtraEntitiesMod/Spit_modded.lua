@@ -12,7 +12,7 @@ local originalSpitProcessHit
 originalSpitProcessHit = Class_ReplaceMethod( "Spit", "ProcessHit", 
 	function(self, targetHit, surface, normal)
 	    -- for npcs, somethings not working so DoDamager here
-		/*
+        --[[
         if targetHit and self:GetOwner() ~= targetHit and self:GetOwner().isaNpc then
                     
             local weapon = self:GetOwner():GetActiveWeapon()
@@ -31,7 +31,7 @@ originalSpitProcessHit = Class_ReplaceMethod( "Spit", "ProcessHit",
 
 
         end
-		*/
+		]]
 		originalSpitProcessHit(self, targetHit, surface, normal)
 	end
 )

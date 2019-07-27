@@ -44,12 +44,12 @@ end
 
 function LogicMixin:__initmixin() 
     self.initialEnabled = self.enabled
-    /*
+    --[[
     table.insert(kLogicEntityList, {
                                     name = self.name,
                                     id = self:GetId(),
                                     } )
-    */  
+    ]]
     if self.name and self.name ~= "" then                              
         kLogicEntityList[self.name] = self:GetId()
     end
