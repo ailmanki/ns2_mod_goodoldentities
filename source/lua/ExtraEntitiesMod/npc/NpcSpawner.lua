@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// base class for spawning npcs
+-- base class for spawning npcs
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/npc/NpcMixin.lua")
 
@@ -40,7 +40,7 @@ if Server then
     end
 
     function NpcSpawner:OnLogicTrigger(player) 
-        // spawn npc
+        -- spawn npc
         self:Spawn()
     end
     
@@ -49,7 +49,7 @@ if Server then
         local extents = LookupTechData(self:GetTechId(), kTechDataMaxExtents) or Vector(1,1,1)
         local position = GetRandomSpawnForCapsule(extents.y, extents.x , self:GetOrigin(), 0, 0.1, EntityFilterOne(self))
         if not position then 
-            // search clear spawn pos
+            -- search clear spawn pos
             for index = 1, 50 do
                 position = GetRandomSpawnForCapsule(extents.y, extents.x , self:GetOrigin(), 0, 2, EntityFilterOne(self))
                 if position then

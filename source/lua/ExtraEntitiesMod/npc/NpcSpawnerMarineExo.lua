@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// base class for spawning npcs
+-- base class for spawning npcs
 Script.Load("lua/ExtraEntitiesMod/npc/NpcSpawner.lua")
 
 class 'NpcSpawnerMarineExo' (NpcSpawner)
@@ -33,7 +33,7 @@ if Server then
     function NpcSpawnerMarineExo:Spawn()
         local values = self:GetValues()  
         
-         // handle weapons before spawn
+         -- handle weapons before spawn
         if self.weapons == 0 then
             self.layout = "ClawMinigun"
         elseif self.weapons == 1 then

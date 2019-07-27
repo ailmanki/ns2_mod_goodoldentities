@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// base class for spawning npcs
+-- base class for spawning npcs
 Script.Load("lua/ExtraEntitiesMod/npc/NpcSpawner.lua")
 
 class 'NpcSpawnerMarine' (NpcSpawner)
@@ -36,12 +36,12 @@ if Server then
         local entity = Server.CreateEntity(Marine.kMapName, values)
         InitMixin(entity, NpcMixin)
         
-        // destroy all weapons and give them our weapons
+        -- destroy all weapons and give them our weapons
         entity:DestroyWeapons()        
         
         local items = {}             
         
-        // always include builder
+        -- always include builder
         table.insert(items, Builder.kMapName)
       
         if self.weapons == 0 then

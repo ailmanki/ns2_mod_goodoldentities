@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicEventListener.lua
-// Base entity for LogicEventListener things
+-- LogicEventListener.lua
+-- Base entity for LogicEventListener things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -46,20 +46,20 @@ end
 
 function LogicEventListener:OnEvent(msg, targetEntity)
     if self.enabled then
-        if self.listenEvent == 0 then           // game started
+        if self.listenEvent == 0 then           -- game started
             if msg == "Game started" then        
                 self:TriggerOutputs()
             end
-        // something strange here in the code but ok lets just flip it
-        elseif self.listenEvent == 1 then       // team 1 won
+        -- something strange here in the code but ok lets just flip it
+        elseif self.listenEvent == 1 then       -- team 1 won
             if msg == "Alien win" then 
                 self:TriggerOutputs()
             end        
-        elseif self.listenEvent == 2 then       // team 2 won            
+        elseif self.listenEvent == 2 then       -- team 2 won
             if msg == "Marine win" then        
                 self:TriggerOutputs()
             end         
-        elseif self.listenEvent == 3 then       // any team won
+        elseif self.listenEvent == 3 then       -- any team won
             if msg == "Marine win" or msg == "Alien win" then        
                 self:TriggerOutputs()
             end   

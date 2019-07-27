@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// NobuildArea.lua
-// Entity for mappers to create teleporters
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- NobuildArea.lua
+-- Entity for mappers to create teleporters
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

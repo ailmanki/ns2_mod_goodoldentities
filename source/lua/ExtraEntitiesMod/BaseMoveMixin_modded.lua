@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 
-// cause exo, lerk etc have their own AdjustForce function need to call this
+-- cause exo, lerk etc have their own AdjustForce function need to call this
 local originalBaseMoveMixinGetGravityForce = BaseMoveMixin.GetGravityForce
 function BaseMoveMixin:GetGravityForce(input)
 

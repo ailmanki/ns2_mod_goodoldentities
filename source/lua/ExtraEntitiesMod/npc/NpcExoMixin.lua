@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -35,7 +35,7 @@ end
 function NpcExoMixin:GetAttackDistanceOverride()
     if self.target and self:GetTarget() then
         if self:GetTarget():isa("Egg") then
-            // walk onto the egg to smash it
+            -- walk onto the egg to smash it
             return 0
         end
     end

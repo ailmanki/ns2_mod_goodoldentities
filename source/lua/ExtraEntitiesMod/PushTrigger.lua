@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// PushTrigger.lua
-// Entity for mappers to create teleporters
+-- PushTrigger.lua
+-- Entity for mappers to create teleporters
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -26,7 +26,7 @@ local function PushEntity(self, entity)
         local force = self.pushForce
         if self.pushDirection then      
             
-            // get him in the air a bit
+            -- get him in the air a bit
             if entity:GetIsOnGround() then
                 local extents = GetExtents(entity:GetTechId())            
                 if GetHasRoomForCapsule(extents, entity:GetOrigin() + Vector(0, extents.y + 0.2, 0), CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, nil, EntityFilterTwo(self, entity)) then                
@@ -84,7 +84,7 @@ function PushTrigger:OnTriggerEntered(enterEnt, triggerEnt)
 end
 
 
-//Addtimedcallback had not worked, so lets search it this way
+--Addtimedcallback had not worked, so lets search it this way
 function PushTrigger:OnUpdate(deltaTime)
 
     if self.enabled then

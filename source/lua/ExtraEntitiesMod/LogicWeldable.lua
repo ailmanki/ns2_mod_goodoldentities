@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicWeldable.lua
-// Base entity for LogicWeldable things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicWeldable.lua
+-- Base entity for LogicWeldable things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/WeldableMixin.lua")
@@ -56,7 +56,7 @@ function LogicWeldable:OnInitialized()
         self:SetUpdates(true)
         self.weldPercentagePerSecond  = 1 / self.weldTime
 
-        // weldables always belong to the Marine team.
+        -- weldables always belong to the Marine team.
         self:SetTeamNumber(kTeam1Index)  
     end
     self:SetArmor(0)

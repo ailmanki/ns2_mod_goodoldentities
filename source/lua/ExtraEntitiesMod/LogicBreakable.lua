@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2013
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2013
+--
+--________________________________
 
 Script.Load("lua/ScriptActor.lua")
 Script.Load("lua/Mixins/ModelMixin.lua")
@@ -148,7 +148,7 @@ if (Client) then
     function LogicBreakable:OnKillClient()
         BaseModelMixin.OnDestroy(self)
         self:SetPhysicsType(PhysicsType.None) 
-        // TODO: delete phys model from Client.propList
+        -- TODO: delete phys model from Client.propList
     end
 
 

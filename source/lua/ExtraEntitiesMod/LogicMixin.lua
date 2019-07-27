@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -11,7 +11,7 @@ Script.Load("lua/PathingUtility.lua")
 LogicMixin = CreateMixin( LogicMixin )
 LogicMixin.type = "Logic"
 
-// table with all logic entities in it
+-- table with all logic entities in it
 kLogicEntityList = {}
 kLogicEntitiesSearched = false
 
@@ -31,7 +31,7 @@ LogicMixin.networkVars =
 }
 
 local function searchEntities(self)
-    // clear the entity list and rewrite it
+    -- clear the entity list and rewrite it
     kLogicEntityList = {}
     for index, entity in ipairs(GetEntitiesWithMixin("Logic")) do
         if entity.name and entity.name ~= "" then   
@@ -63,7 +63,7 @@ end
 
 
 function LogicMixin:OnEntityChange(oldId, newId)
-    // change the id in the list
+    -- change the id in the list
     if not kLogicEntityList then
         kLogicEntityList = {}
     end
@@ -89,7 +89,7 @@ function LogicMixin:GetLogicEntityWithName(name)
 end
 
 
-// normal output, but entities can override it
+-- normal output, but entities can override it
 function LogicMixin:GetOutputNames()
     return {self.output1}
 end
@@ -104,7 +104,7 @@ function LogicMixin:TriggerOutputs(player, number, func, retryList)
             if entity then
                 if  HasMixin(entity, "Logic") then
                     if func then
-                        // custom output functions
+                        -- custom output functions
                         if func == "reset" then
                             entity:Reset()
                         end
@@ -127,13 +127,13 @@ function LogicMixin:TriggerOutputs(player, number, func, retryList)
     end
 
     if #retryTriggerEntities > 0 then
-        // Try to search the entities again (doors sometimes change their id)
+        -- Try to search the entities again (doors sometimes change their id)
         searchEntities(self) 
         self:TriggerOutputs(nil, nil, nil, retryTriggerEntities)
     end
 end
 
-// needed when we have more than 1 output
+-- needed when we have more than 1 output
 function LogicMixin:GetUsedOutputs()
     local outputs = {}
     for i, output in ipairs(self.possibleOutputs) do
@@ -146,21 +146,21 @@ function LogicMixin:GetUsedOutputs()
 end
 
 
-// entities can override this
+-- entities can override this
 function LogicMixin:OnLogicTrigger(player) 
 end
 
 
-// some entities have special functions, but others just switches on, off etc
+-- some entities have special functions, but others just switches on, off etc
 function LogicMixin:OnTriggerAction()
     if self.onTriggerAction == 0 or self.onTriggerAction == nil then
-        // toggle
+        -- toggle
         self.enabled = not self.enabled
     elseif self.onTriggerAction == 1 then
-        // stay on
+        -- stay on
         self.enabled = true
     elseif self.onTriggerAction == 2 then
-        // stay off
+        -- stay off
         self.enabled = off
     end  
 end

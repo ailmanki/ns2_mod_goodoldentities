@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -25,7 +25,7 @@ NpcOnosMixin.networkVars =
 {
 }
 
-// make stomp a bit better for bots
+-- make stomp a bit better for bots
 local function StompEnemies(self)
     
     local enemyTeamNum = GetEnemyTeamNumber(self:GetTeamNumber())
@@ -43,13 +43,13 @@ end
 
 
 function NpcOnosMixin:__initmixin() 
-    // can use stomp    
+    -- can use stomp
     self.twoHives = true 
     self.threeHives = true 
 end
 
 
-// run to the enemy if near and see it
+-- run to the enemy if near and see it
 function NpcOnosMixin:AiSpecialLogic(deltaTime)
     local order = self:GetCurrentOrder()
     if order then
@@ -59,7 +59,7 @@ function NpcOnosMixin:AiSpecialLogic(deltaTime)
                 local distance = (self:GetOrigin() - self:GetTarget():GetOrigin()):GetLengthXZ() 
                 if (distance > 6 or self.nextSprintStop) then
             
-                    // only random
+                    -- only random
                     if not self.nextSprintStop and math.random(1, 100) < 10 then
                         self.nextSprintStop = Shared.GetTime() + 3 
                     end

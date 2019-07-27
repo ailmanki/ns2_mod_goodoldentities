@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// TeleportTrigger.lua
-// Entity for mappers to create teleporters
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- TeleportTrigger.lua
+-- Entity for mappers to create teleporters
 
 class 'PortalGunTeleport' (TeleportTrigger)
 
@@ -36,8 +36,8 @@ end
 
 function PortalGunTeleport:OnInitialized()
 
-    // TODO: get the invert angels of the wall
-    //self:SetAngles(Angles(90,0,0))
+    -- TODO: get the invert angels of the wall
+    --self:SetAngles(Angles(90,0,0))
     local angles = self:GetAngles()
     self.scale = Vector(1,1,1)
     self.waitDelay = 0.8
@@ -89,13 +89,13 @@ function PortalGunTeleport:SetDestination(newDestinationId)
 end
 
 function PortalGunTeleport:SetType(type)
-    // Todo: CHange color    
+    -- Todo: CHange color
     self.cinematicType = type      
     
 end
 
 
-//Addtimedcallback had not worked, so lets search it this way
+--Addtimedcallback had not worked, so lets search it this way
 function PortalGunTeleport:OnUpdate(deltaTime)
 
     if self.enabled then
@@ -113,7 +113,7 @@ end
 if Client then
     function PortalGunTeleport:CreateCinematic(type)
 
-            // Todo: change only the cinematic when the type changes
+            -- Todo: change only the cinematic when the type changes
             if not self.portalCinematic or type ~= self.cinematicType then
                 self.portalCinematic = Client.CreateCinematic(RenderScene.Zone_Default)    
                 self.portalCinematic:SetCinematic(self:GetCinematicName())

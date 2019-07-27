@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// base class for spawning npcs
+-- base class for spawning npcs
 
 class 'NpcQueueManager' (Entity)
 
@@ -43,7 +43,7 @@ if Server then
     function NpcQueueManager:AddToQueue(values)
         table.insert(self.kNpcQueue, values)
         if #self.kNpcQueue > kMaxQueueEntries then
-            // if there are to many entries, delete the oldest one
+            -- if there are to many entries, delete the oldest one
             table.remove(self.kNpcQueue, 1) 
         end
     end

@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -27,11 +27,11 @@ NpcSkulkMixin.networkVars =
 
 
 function NpcSkulkMixin:__initmixin()   
-    // can use leap    
+    -- can use leap
     self.twoHives = true 
     self.threeHives = true 
     
-    // some skulks will use xeno
+    -- some skulks will use xeno
     if math.random(1, 100) <= 10 then                    
         self.canUseXenocid  = true
     end
@@ -44,14 +44,14 @@ end
 
 
 function NpcSkulkMixin:EngagementPointOverride(target)
-    // attack exos at origin
+    -- attack exos at origin
     if target:isa("Exo") then
         return target:GetOrigin()
     end
 end
 
 
-// use leap step sometimes
+-- use leap step sometimes
 function NpcSkulkMixin:AiSpecialLogic(deltaTime)
 
     local order = self:GetCurrentOrder()
@@ -59,8 +59,8 @@ function NpcSkulkMixin:AiSpecialLogic(deltaTime)
         if self.points and self.index and #self.points >= self.index then
             if ((self:GetOrigin() - self.points[self.index]):GetLengthXZ() > 2 ) then
                 if not self.usedLeap then
-                    // shadow step will bring you faster forward
-                    // only random
+                    -- shadow step will bring you faster forward
+                    -- only random
                     if math.random(1, 100) <= 5 then                    
                         self.usedLeap = true
                     end
@@ -75,7 +75,7 @@ function NpcSkulkMixin:AiSpecialLogic(deltaTime)
         
         if self.usedLeap and not self.inTargetRange then
             self:PressButton(Move.SecondaryAttack)
-            // unlimited leap :-)
+            -- unlimited leap :-)
             self.secondaryAttackLastFrame = false
         end
         
@@ -90,7 +90,7 @@ function NpcSkulkMixin:AttackOverride(activeWeapon)
     end
     
     local attack = true
-    // wait if we got 3rd weapon rdy
+    -- wait if we got 3rd weapon rdy
     if (self.useXenocid) then
         if not activeWeapon:isa("XenocideLeap") then
             attack = false
@@ -106,7 +106,7 @@ function NpcSkulkMixin:AttackOverride(activeWeapon)
 end
 
 
-// normal xeno update doesnt work so do it here
+-- normal xeno update doesnt work so do it here
 function NpcSkulkMixin:UpdateXenocide(activeWeapon)
 
     if not activeWeapon.xenocideTimeLeft then

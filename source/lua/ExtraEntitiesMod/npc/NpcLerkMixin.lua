@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -29,7 +29,7 @@ NpcLerkMixin.networkVars =
 function NpcLerkMixin:__initmixin()   
 end
 
-// let lerk hover over the ground
+-- let lerk hover over the ground
 function NpcLerkMixin:AiSpecialLogic(deltaTime)
 
      if self:GetCurrentOrder() then
@@ -61,7 +61,7 @@ function NpcLerkMixin:UpdateOrderLogic()
             if target then
             
                 if activeWeapon then          
-                    // attack with spikes also, when seeing the entitiy
+                    -- attack with spikes also, when seeing the entitiy
                     if GetCanSeeEntity(self, target) then
                         self:PressButton(Move.SecondaryAttack)                   
                     end

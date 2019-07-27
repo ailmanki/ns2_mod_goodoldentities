@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// FuncTrainWaypoint.lua
-// Entity for mappers to create drivable train waypoints
+-- FuncTrainWaypoint.lua
+-- Entity for mappers to create drivable train waypoints
 
 class 'FuncTrainWaypoint' (ScriptActor)
 

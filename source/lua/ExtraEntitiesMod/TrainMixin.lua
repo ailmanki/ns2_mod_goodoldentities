@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
 Script.Load("lua/PathingMixin.lua")
@@ -13,9 +13,9 @@ TrainMixin.type = "Train"
 
 local pi2 = math.pi * 2
 
-kDefaultTurnSpeed = math.pi // 180 degrees per second
-kDefaultMaxSpeedAngle = math.pi / 18 // 10 degrees
-kDefaultNoSpeedAngle = math.pi / 4 // 45 degrees
+kDefaultTurnSpeed = math.pi -- 180 degrees per second
+kDefaultMaxSpeedAngle = math.pi / 18 -- 10 degrees
+kDefaultNoSpeedAngle = math.pi / 4 -- 45 degrees
 
 TrainMixin.expectedMixins =
 {
@@ -43,8 +43,8 @@ local function TransformPlayerCoordsForTrain(player, srcCoords, dstCoords)
 
     local viewCoords = player:GetViewCoords()
     
-    // If we're going through the backside of the phase gate, orient us
-    // so we go out of the front side of the other gate.
+    -- If we're going through the backside of the phase gate, orient us
+    -- so we go out of the front side of the other gate.
     if Math.DotProduct(viewCoords.zAxis, srcCoords.zAxis) < 0 then
     
         srcCoords.zAxis = -srcCoords.zAxis
@@ -52,7 +52,7 @@ local function TransformPlayerCoordsForTrain(player, srcCoords, dstCoords)
         
     end
     
-    // Redirect player velocity relative to gates
+    -- Redirect player velocity relative to gates
     local invSrcCoords = srcCoords:GetInverse()   
     local viewCoords = dstCoords * (invSrcCoords * viewCoords)
     local viewAngles = Angles()
@@ -73,14 +73,14 @@ end
 
 function TrainMixin:OnInitialized()
 
-    // Save origin, angles, etc. so we can restore on reset
+    -- Save origin, angles, etc. so we can restore on reset
     self.savedOrigin = Vector(self:GetOrigin())
     self.savedAngles = Angles(self:GetAngles())
         
     if Server then
 		self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
         InitMixin(self, ControllerMixin)
-        // set a box so it can be triggered, use the trigger scale from the mapEditor
+        -- set a box so it can be triggered, use the trigger scale from the mapEditor
         if self:GetPushPlayers() then
             self:MoveTrigger()        
         end        
@@ -106,12 +106,12 @@ function TrainMixin:OnUpdate(deltaTime)
     
 end
 
-// Required by ControllerMixin.
+-- Required by ControllerMixin.
 function TrainMixin:GetControllerSize()
     return GetTraceCapsuleFromExtents(self:GetExtents())    
 end
 
-// Required by ControllerMixin.
+-- Required by ControllerMixin.
 function TrainMixin:GetMovePhysicsMask()
     return PhysicsMask.Movement
 end
@@ -119,7 +119,7 @@ end
 
 function TrainMixin:Reset()
 
-    // Restore original origin, angles, etc. as it could have been rag-dolled
+    -- Restore original origin, angles, etc. as it could have been rag-dolled
     self:SetOrigin(self.savedOrigin)
     self:SetAngles(self.savedAngles)
     self.driving = false
@@ -137,8 +137,8 @@ function TrainMixin:Reset()
 end
 
 function TrainMixin:SetOldOrigin(origin)
-    // locally save the old origin   
-    //Entity.SetOrigin(self, origin)
+    -- locally save the old origin
+    --Entity.SetOrigin(self, origin)
     if not self.oldOrigin then
         self.oldOrigin = self:GetOrigin()  
     end
@@ -151,7 +151,7 @@ function TrainMixin:SetOldOrigin(origin)
 end
 
 
-// set and get Velocity to update the players movement, too
+-- set and get Velocity to update the players movement, too
 function TrainMixin:SetMovementVector(newVector)
     self.movementVector = newVector   
 end
@@ -202,7 +202,7 @@ function TrainMixin:MovePlayersInTrigger(deltaTime)
     for _, entity in ipairs(self:GetEntitiesInTrigger()) do 
         if self.driving and entity~= self then
             if not entity:GetIsJumping() then
-                // change position when the train is driving
+                -- change position when the train is driving
                 local entOrigin = entity:GetOrigin()
                 local trainOrigin = self:GetOrigin()
                 local newOrigin = entOrigin
@@ -211,13 +211,13 @@ function TrainMixin:MovePlayersInTrigger(deltaTime)
                 local entityAngles = entity:GetAngles() 
                 local degrees = selfDeltaAngles.yaw
                 
-                // 2d rotation , I don't think I need 3d here, will get the correct position after rotating the train
+                -- 2d rotation , I don't think I need 3d here, will get the correct position after rotating the train
                 newOrigin.z = trainOrigin.z + (math.cos(degrees) * (entOrigin.z - trainOrigin.z) -  math.sin(degrees) * (entOrigin.x - trainOrigin.x))                
                 newOrigin.x = trainOrigin.x + (math.sin(degrees) * (entOrigin.z - trainOrigin.z) +  math.cos(degrees) * (entOrigin.x - trainOrigin.x))
 
                 entityAngles.yaw = entityAngles.yaw + selfDeltaAngles.yaw
                 local coords = Coords.GetLookIn(newOrigin, self:GetAngles():GetCoords().zAxis)
-                //TransformPlayerCoordsForTrain(entity, entity:GetCoords(), coords)               
+                --TransformPlayerCoordsForTrain(entity, entity:GetCoords(), coords)
                 entity:SetOrigin(newOrigin  + self:GetMovementVector())
                 entity.pushTime = -1
             end
@@ -231,7 +231,7 @@ function TrainMixin:MoveTrigger()
     local scale = Vector(1,1,1)
     if self.scaleTrigger then
         scale = self.scaleTrigger
-    // scale1 was the old name for this, dunno why but sometimes its still in there
+    -- scale1 was the old name for this, dunno why but sometimes its still in there
     elseif self.scale1 then
          scale = self.scale1
     else
@@ -241,13 +241,13 @@ function TrainMixin:MoveTrigger()
     self:SetTriggerCollisionEnabled(true)
     */
     
-    // make it a bit bigger so were inside the trigger
+    -- make it a bit bigger so were inside the trigger
     local coords = self:GetCoords()
     coords.yAxis = coords.yAxis  * 5
     
     if self.triggerModel then
-        //Shared.DestroyCollisionObject(self.triggerModel)
-        //self.triggerModel = nil
+        --Shared.DestroyCollisionObject(self.triggerModel)
+        --self.triggerModel = nil
         self.triggerModel:SetCoords(coords)
         self.triggerModel:SetBoneCoords(coords, CoordsArray())
     else    
@@ -271,27 +271,27 @@ function TrainMixin:OnTriggerEntered(enterEnt, triggerEnt)
 end
 
 function TrainMixin:OnTriggerExited(exitEnt, triggerEnt)
-    //DebugCircle(self:GetOrigin(), 2, Vector(1, 0, 0), 1, 1, 1, 1, 1)
+    --DebugCircle(self:GetOrigin(), 2, Vector(1, 0, 0), 1, 1, 1, 1, 1)
 end
 
 
-//**********************************
-// Driving things
-//**********************************
+--**********************************
+-- Driving things
+--**********************************
 
-// TODO:Accept
-// 1. Generate Path
-// 2. Move
+-- TODO:Accept
+-- 1. Generate Path
+-- 2. Move
 function TrainMixin:TrainMoveToTarget(physicsGroupMask, endPoint, movespeed, time)
 
-    // check if we'Ve already reached the point
+    -- check if we'Ve already reached the point
     
     PROFILE("TrainMixin:MoveToTarget")
     if not self:CheckTrainTarget(endPoint) then
         return true
     end
    
-    // save the cursor in case we need to slow down
+    -- save the cursor in case we need to slow down
     local origCursor = PathCursor():Clone(self.cursor)    
     
     self.cursor:Advance(movespeed, time, self)    
@@ -299,7 +299,7 @@ function TrainMixin:TrainMoveToTarget(physicsGroupMask, endPoint, movespeed, tim
     local rotate = self:GetRotationEnabled()
     maxSpeed = self:TrainSmoothTurn(time, self.cursor:GetDirection(), movespeed, rotate)
 
-    // Don't move during repositioning
+    -- Don't move during repositioning
     if HasMixin(self, "Repositioning") and self:GetIsRepositioning() then
     
         maxSpeed = 0
@@ -308,17 +308,17 @@ function TrainMixin:TrainMoveToTarget(physicsGroupMask, endPoint, movespeed, tim
     end
     
     if maxSpeed < movespeed then
-        // use the copied cursor and discard the current cursor
+        -- use the copied cursor and discard the current cursor
         self.cursor = origCursor
         self.cursor:Advance(maxSpeed, time, self)
     
     end
     
-    // update our position to the cursors position, after adjusting for ground or hover
+    -- update our position to the cursors position, after adjusting for ground or hover
     local newLocation = self.cursor:GetPosition()          
     self:SetOrigin(newLocation)
          
-    // we are done if we have reached the last point in the path or we have a close-enough condition
+    -- we are done if we have reached the last point in the path or we have a close-enough condition
     local done = self.cursor:TargetReached()
 
     if done then
@@ -330,12 +330,12 @@ function TrainMixin:TrainMoveToTarget(physicsGroupMask, endPoint, movespeed, tim
 end
 
 function TrainMixin:TrainSmoothTurn(time, direction, moveSpeed, rotate)
-// TODO: make train not turnable (platform)
+-- TODO: make train not turnable (platform)
     assert(time)
     assert(direction)
     assert(moveSpeed)
     
-    // smooth turning
+    -- smooth turning
     local angles = self:GetAngles()
     local currentYaw = self:NormalizeYaw(angles.yaw)
     local desiredYaw = self:NormalizeYaw(GetYawFromVector(direction))
@@ -344,25 +344,25 @@ function TrainMixin:TrainSmoothTurn(time, direction, moveSpeed, rotate)
     if rotate then
         angles.yaw = self:NormalizeYaw(currentYaw + turnAmount)
         self:SetAngles(angles)    
-        // speed is maximum inside the maxSpeedAngle, and zero at noSpeedAngle, and vary constantly between them
+        -- speed is maximum inside the maxSpeedAngle, and zero at noSpeedAngle, and vary constantly between them
         local maxSpeedAngle,minSpeedAngle = unpack(self:GetSpeedLimitAngles())
         moveSpeed = moveSpeed * self:CalcYawSpeedFraction(remainingYaw, maxSpeedAngle, minSpeedAngle)
         if self.SmoothTurnOverride then
             moveSpeed = self:SmoothTurnOverride(time, direction, moveSpeed)
         end
     end 
-    // a turn limit may never limit the speed below 10% of speed, as speed zero would just stop us completly...
+    -- a turn limit may never limit the speed below 10% of speed, as speed zero would just stop us completly...
     return moveSpeed
     
 end
 
-//
-// make sure we have a path to the target
-// returns false if no path found.
-//
+--
+-- make sure we have a path to the target
+-- returns false if no path found.
+--
 function TrainMixin:CheckTrainTarget(endPoint)
 
-    // if we don't have a cursor, or the targetPoint differs, create a new path
+    -- if we don't have a cursor, or the targetPoint differs, create a new path
     if self.cursor == nil or (self.targetPoint - endPoint):GetLengthXZ() > 0.001 then
 
         self.targetPoint = endPoint

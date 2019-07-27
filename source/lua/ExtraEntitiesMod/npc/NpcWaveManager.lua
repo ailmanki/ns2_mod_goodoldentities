@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// base class for spawning npcs
+-- base class for spawning npcs
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/npc/NpcMixin.lua")
@@ -66,7 +66,7 @@ if Server then
         if self.active then
             local time = Shared.GetTime()
             if not self.lastWaveSpawn or time - self.lastWaveSpawn >= self.waveTime then
-                // spawn npcs
+                -- spawn npcs
                 local waypoint = nil
                 if self.waypoint then
                     waypoint = self:GetLogicEntityWithName(self.waypoint)
@@ -79,11 +79,11 @@ if Server then
                 
                 if self.currentWave >= self.maxWaveNumber then
                     if self.maxWaveNumber ~= 99 then
-                        // max wave reached
+                        -- max wave reached
                         self:TriggerOutputs()
                         self:ResetWaves()
                     else
-                        // infinite wave until triggered
+                        -- infinite wave until triggered
                         self.currentWave = 0
                     end
                 end
@@ -125,7 +125,7 @@ if Server then
         
 
     function NpcManager:GetValues()
-        // values every npc needs for the npc mixin
+        -- values every npc needs for the npc mixin
         
         local layout = ""
         if self.class == 6 then

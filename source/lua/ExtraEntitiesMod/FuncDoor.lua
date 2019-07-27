@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 Script.Load("lua/Door.lua")
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
@@ -47,12 +47,12 @@ local function InitModel(self)
         self.model = kModelNameClean
     end
     
-    //self:SetModel(modelName, kDoorAnimationGraph)
+    --self:SetModel(modelName, kDoorAnimationGraph)
        
 end
 
 function FuncDoor:OnInitialized()
-    // Don't call Door OnInit, we want to create or own Model
+    -- Don't call Door OnInit, we want to create or own Model
     ScriptActor.OnInitialized(self) 
     InitModel(self)    
     InitMixin(self, ScaledModelMixin)
@@ -75,11 +75,11 @@ function FuncDoor:OnInitialized()
         if self.stayOpen then  
             self.timedCallbacks = {}
         end
-        // the ObsticleMixin includes the object automatically to the mesh
+        -- the ObsticleMixin includes the object automatically to the mesh
         self.AddedToMesh = true
         self:SetPhysicsType(PhysicsType.Kinematic)
         self:SetPhysicsGroup(PhysicsGroup.BigStructuresGroup)
-        //Pathing.CreatePathingObject(self.model, self:GetCoords())
+        --Pathing.CreatePathingObject(self.model, self:GetCoords())
     end
 end
 
@@ -123,7 +123,7 @@ function FuncDoor:Reset()
         self:SetState(Door.kState.Welded)
     end
 	self.AddedToMesh = false
-    //InitModel(self)
+    --InitModel(self)
 end
 
 function FuncDoor:OnUse(player, elapsedTime)
@@ -154,7 +154,7 @@ function FuncDoor:OnLogicTrigger(player)
     
 end
 
-// only way to scale the model
+-- only way to scale the model
 function FuncDoor:OnAdjustModelCoords(modelCoords)
 
     local coords = modelCoords

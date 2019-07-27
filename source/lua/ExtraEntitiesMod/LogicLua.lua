@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicLua.lua
-// Base entity for LogicLua things
+-- LogicLua.lua
+-- Base entity for LogicLua things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

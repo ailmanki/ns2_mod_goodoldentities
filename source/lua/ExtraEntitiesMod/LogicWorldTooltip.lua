@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// modified from WorlToolTop
+-- modified from WorlToolTop
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

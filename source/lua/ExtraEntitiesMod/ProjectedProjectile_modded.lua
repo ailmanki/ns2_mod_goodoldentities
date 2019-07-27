@@ -1,14 +1,14 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 Script.Load("lua/Class.lua")
 Script.Load("lua/Team.lua")
 
-// fix gorge spit
+-- fix gorge spit
 if Server then
     local originalPredictedProjectileOnUpdate
      originalPredictedProjectileOnUpdate = Class_ReplaceMethod( "PredictedProjectile", "OnUpdate", 

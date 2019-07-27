@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// LogicGiveItem.lua
-// Base entity for LogicGiveItem things
+-- LogicGiveItem.lua
+-- Base entity for LogicGiveItem things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -37,7 +37,7 @@ function LogicGiveItem:OnLogicTrigger(player)
         if self.type == 0 then
             table.insert(items, Axe.kMapName)        
         elseif self.type == 1 then
-            // due to a bug we need to get axe first
+            -- due to a bug we need to get axe first
             if not player:GetWeaponInHUDSlot(3) then
                 table.insert(items, Axe.kMapName) 
             end

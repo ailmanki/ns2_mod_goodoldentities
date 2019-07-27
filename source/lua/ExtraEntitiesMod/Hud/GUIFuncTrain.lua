@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Combat Mod     
-//	Made by JimWest and MCMLXXXIV, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Combat Mod
+--	Made by JimWest and MCMLXXXIV, 2012
+--
+--________________________________
 
-// GUIFuncTrain.lua
+-- GUIFuncTrain.lua
 
 class 'GUIFuncTrain' (GUIAnimatedScript)
 
@@ -31,7 +31,7 @@ function GUIFuncTrain:Initialize()
 
 	GUIAnimatedScript.Initialize(self)
     
-	// Used for Global Offset
+	-- Used for Global Offset
 	self.background = self:CreateAnimatedGraphicItem()
     self.background:SetIsScaling(false)
     self.background:SetSize( Vector(Client.GetScreenWidth(), Client.GetScreenHeight(), 0) )
@@ -40,7 +40,7 @@ function GUIFuncTrain:Initialize()
     self.background:SetLayer(kGUILayerPlayerHUDBackground)
     self.background:SetColor( Color(1, 1, 1, 0) )
 	
-    // Timer display background
+    -- Timer display background
     self.timerBackground = self:CreateAnimatedGraphicItem()
     self.timerBackground:SetSize( Vector(GUIFuncTrain.kBackgroundWidth, GUIFuncTrain.kBackgroundHeight, 0) )
     self.timerBackground:SetPosition(Vector(GUIFuncTrain.kBackgroundOffsetX - (GUIFuncTrain.kBackgroundWidth / 2), GUIFuncTrain.kBackgroundOffsetY, 0))
@@ -51,7 +51,7 @@ function GUIFuncTrain:Initialize()
 	self.timerBackground:SetColor( GUIFuncTrain.kBackgroundColor )
 	self.timerBackground:SetIsVisible(true)
 	
-	// Time remaining
+	-- Time remaining
     self.timeRemainingText = self:CreateAnimatedTextItem()
     self.timeRemainingText:SetAnchor(GUIItem.Middle, GUIItem.Center)
     self.timeRemainingText:SetPosition(GUIFuncTrain.kTimeOffset)

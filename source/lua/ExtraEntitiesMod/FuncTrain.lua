@@ -1,16 +1,16 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// FuncTrain.lua
-// Entity for mappers to create drivable trains
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- FuncTrain.lua
+-- Entity for mappers to create drivable trains
 
 Script.Load("lua/ScriptActor.lua")
 Script.Load("lua/Mixins/ModelMixin.lua")
 Script.Load("lua/Mixins/SignalEmitterMixin.lua")
-// needed for the MoveToTarget Command
+-- needed for the MoveToTarget Command
 Script.Load("lua/PathingMixin.lua")
 Script.Load("lua/TriggerMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/TrainMixin.lua")
@@ -58,7 +58,7 @@ function FuncTrain:OnInitialized()
 	self:SetScaledModel(self.model)
     
     self:SetPhysicsType(PhysicsType.Kinematic)
-    // to prevent collision with whip bombs
+    -- to prevent collision with whip bombs
     self:SetPhysicsGroup(PhysicsGroup.MediumStructuresGroup)
     
     if Server then
@@ -87,14 +87,14 @@ function FuncTrain:OnUse(player, elapsedTime, useAttachPoint, usePoint, useSucce
     if Server then   
         self:ChangeDrivingStatus()
     elseif Client then
-        //player:OnTrainUse(self) 
+        --player:OnTrainUse(self)
     end
     
 end
 
-//**********************************
-// Driving things
-//**********************************
+--**********************************
+-- Driving things
+--**********************************
 
 function FuncTrain:ChangeDrivingStatus()
 
@@ -132,9 +132,9 @@ function FuncTrain:GetRotationEnabled()
 end
 
 
-//**********************************
-// Viewing things
-//**********************************
+--**********************************
+-- Viewing things
+--**********************************
 
 function FuncTrain:GetViewOffset()
     return self:GetCoords().yAxis * 1.2
@@ -146,21 +146,21 @@ end
 
 function FuncTrain:GetViewAngles()
     local viewCoords = Coords.GetLookIn(self:GetEyePos(), self:GetOrigin())
-    //local viewAngles = Angles()
-    //return viewAngles:BuildFromCoords(viewCoords) or self:GetAngles().yaw
+    --local viewAngles = Angles()
+    --return viewAngles:BuildFromCoords(viewCoords) or self:GetAngles().yaw
     local angles = Angles(0,0,0)
     angles.yaw = GetYawFromVector(viewCoords.zAxis)
     angles.pitch = GetPitchFromVector(viewCoords.xAxis)
     return angles
 end
 
-// will create a path so the train will know the next points
+-- will create a path so the train will know the next points
 function FuncTrain:CreatePath(onUpdate)
     local origin = self:GetOrigin()
     local tempList = {}
     self.waypointList = {}
     for _, ent in ientitylist(Shared.GetEntitiesWithClassname("FuncTrainWaypoint")) do 
-        // only search the waypoints for that train
+        -- only search the waypoints for that train
         if ent.trainName == self.name then
             self.waypointList[ent.number] = {}
             self.waypointList[ent.number].origin = ent:GetOrigin()
@@ -168,14 +168,14 @@ function FuncTrain:CreatePath(onUpdate)
         end        
     end
     
-    // then copy the wayPointList into a new List so its 1-n
+    -- then copy the wayPointList into a new List so its 1-n
     
     for i, wayPoint in pairs(self.waypointList) do
         table.insert(tempList, wayPoint)
     end
     
-    // create a smooth path
-    //self.waypointList = self:CreateSmoothPath(tempList, 1)      
+    -- create a smooth path
+    --self.waypointList = self:CreateSmoothPath(tempList, 1)
     self.waypointList = tempList  
 
     tempList = nil
@@ -193,23 +193,23 @@ function FuncTrain:OnLogicTrigger(player)
 end
 
 
-//**********************************
-// Sever and Client only functions
-//**********************************
+--**********************************
+-- Sever and Client only functions
+--**********************************
 
 if Server then
   
     function FuncTrain:UpdatePosition(deltaTime)
        
         if self.nextWaypoint then
-            // check if the waypoint got a delay
+            -- check if the waypoint got a delay
             local done = self:TrainMoveToTarget(PhysicsMask.All, self.nextWaypoint, self:GetSpeed(), deltaTime)                
-            //if self:IsTargetReached(hoverWaypont, kAIMoveOrderCompleteDistance) then
+            --if self:IsTargetReached(hoverWaypont, kAIMoveOrderCompleteDistance) then
                 if done then
                     self.nextWaypoint = nil
                     self:GetNextWaypoint()
                 end
-            //end          
+            --end
 
         else
             self:GetNextWaypoint()
@@ -225,7 +225,7 @@ if Server then
                 self.nextWaypointNr = 1
                 self.nextWaypoint = self.waypointList[self.nextWaypointNr].origin               
             else
-                // check if the waypoint got a delay
+                -- check if the waypoint got a delay
                 local delay = self.waypointList[self.nextWaypointNr].delay 
                 local time = Shared.GetTime()
     
@@ -236,11 +236,11 @@ if Server then
                 if (self.waypointList[self.nextWaypointNr].delay == 0) or time >= self.nextWaypointCheck then 
                     self.waiting = false
                     self.nextWaypointNr = self.nextWaypointNr + 1
-                    // TODO: Dont start at one if last Waypoint
+                    -- TODO: Dont start at one if last Waypoint
                     if self.nextWaypointNr > #self.waypointList then
-                        // end of track
-                        //self.driving = false
-                        //TODO : what happens then?
+                        -- end of track
+                        --self.driving = false
+                        --TODO : what happens then?
                         self.nextWaypointNr = 1
                     end
                     
@@ -262,7 +262,7 @@ if Server then
     end    
 
     function FuncTrain:OnTriggerExited(entity, triggerEnt)
-        // destroy the GUI and let the player mov again
+        -- destroy the GUI and let the player mov again
     end       
 end
 

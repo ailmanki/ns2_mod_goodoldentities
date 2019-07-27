@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicSwitch.lua
-// Base entity for LogicSwitch things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicSwitch.lua
+-- Base entity for LogicSwitch things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

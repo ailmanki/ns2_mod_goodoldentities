@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/FunctionContracts.lua")
 Script.Load("lua/PathingUtility.lua")
@@ -36,7 +36,7 @@ end
 function NpcGorgeMixin:CheckImportantEvents()
    
     if self.lastAttacker then
-        // jump sometimes if getting attacked
+        -- jump sometimes if getting attacked
         if Shared.GetRandomInt(0, 100) <= 10 then
             self:PressButton(Move.Jump)
         end
@@ -46,7 +46,7 @@ function NpcGorgeMixin:CheckImportantEvents()
     local activeWeapon = self:GetActiveWeapon()
 
     if self:GetHealth() < self:GetMaxHealth() then
-        // heal us, but not all the time so we can shoot
+        -- heal us, but not all the time so we can shoot
         if not self.onHealing  then
             local activeWeapon = self:GetActiveWeapon()
             if activeWeapon and activeWeapon:isa("SpitSpray") then
@@ -66,7 +66,7 @@ function NpcGorgeMixin:UpdateOrderLogic()
     local order = self:GetCurrentOrder()             
     if order ~= nil then
         if order:GetType() == kTechId.Heal or order:GetType() == kTechId.AutoHeal then
-            // go to entity and heal it
+            -- go to entity and heal it
         end
     end
     

@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// modified from GuiExploreHint
+-- modified from GuiExploreHint
 
 
 Script.Load("lua/GUIScript.lua")
@@ -35,13 +35,13 @@ GUIEemHint.kResourceIconXOffset = -30
 GUIEemHint.kResourceIconYOffset = 20
 
 GUIEemHint.kResourceIconTextureCoordinates = { }
-// Team coordinates.
+-- Team coordinates.
 table.insert(GUIEemHint.kResourceIconTextureCoordinates, { X1 = 844, Y1 = 412, X2 = 882, Y2 = 450 })
-// Personal coordinates.
+-- Personal coordinates.
 table.insert(GUIEemHint.kResourceIconTextureCoordinates, { X1 = 774, Y1 = 417, X2 = 804, Y2 = 446 })
-// Energy coordinates.
+-- Energy coordinates.
 table.insert(GUIEemHint.kResourceIconTextureCoordinates, { X1 = 828, Y1 = 546, X2 = 859, Y2 = 577 })
-// Ammo coordinates.
+-- Ammo coordinates.
 table.insert(GUIEemHint.kResourceIconTextureCoordinates, { X1 = 828, Y1 = 546, X2 = 859, Y2 = 577 })
 
 GUIEemHint.kResourceColors = { Color(0, 1, 0, 1), Color(0.2, 0.4, 1, 1), Color(1, 0, 1, 1) }
@@ -212,7 +212,7 @@ end
 
 function GUIEemHint:Uninitialize()
 
-    // Everything is attached to the background so uninitializing it will destroy all items.
+    -- Everything is attached to the background so uninitializing it will destroy all items.
     if self.background then
         GUI.DestroyItem(self.background)
     end
@@ -237,7 +237,7 @@ function GUIEemHint:UpdateData(text, hotkey, costNumber, requires, enables, info
         self.resourceIcon:SetIsVisible(true)
         GUISetTextureCoordinatesTable(self.resourceIcon, GUIEemHint.kResourceIconTextureCoordinates[typeNumber])
         self.cost:SetText(ToString(costNumber))
-        //self.cost:SetColor(GUIEemHint.kResourceColors[typeNumber])
+        --self.cost:SetColor(GUIEemHint.kResourceColors[typeNumber])
     else
         self.resourceIcon:SetIsVisible(false)
     end
@@ -280,7 +280,7 @@ function GUIEemHint:UpdateData(text, hotkey, costNumber, requires, enables, info
     
 end
 
-// Determine the height of the tooltip based on all the text inside of it.
+-- Determine the height of the tooltip based on all the text inside of it.
 function GUIEemHint:CalculateTotalTextHeight(text, requires, enables, info)
 
     local totalHeight = 0
@@ -335,7 +335,7 @@ function GUIEemHint:Highlight()
     end
 end
 
-// Start fadeout if we haven't already
+-- Start fadeout if we haven't already
 function GUIEemHint:FadeOut()
 
     self.timeLastData = math.min(self.timeLastData, Shared.GetTime() - kTooltipDuration)

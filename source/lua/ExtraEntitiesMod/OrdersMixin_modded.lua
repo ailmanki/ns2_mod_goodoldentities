@@ -1,18 +1,18 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 
-// tell the LogicWaypoint entity that the order is done
+-- tell the LogicWaypoint entity that the order is done
 local originalOrdersMixinCompletedCurrentOrder = OrdersMixin.CompletedCurrentOrder
 function OrdersMixin:CompletedCurrentOrder()
     local currentOrder = self:GetCurrentOrder()
     if currentOrder then    
         local orderTarget = Shared.GetEntity(currentOrder:GetParam())
-        // call original function here, so the old waypoint is gonna be destroyed
+        -- call original function here, so the old waypoint is gonna be destroyed
         originalOrdersMixinCompletedCurrentOrder(self)
         if orderTarget then
             local entity = nil

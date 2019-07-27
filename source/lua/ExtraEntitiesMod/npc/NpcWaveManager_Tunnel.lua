@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
@@ -85,7 +85,7 @@ function NpcManagerTunnel:OnInitialized()
 		InitMixin(self, StaticTargetMixin)
 		InitMixin(self, SleeperMixin)
 		
-		// This Mixin must be inited inside this OnInitialized() function.
+		-- This Mixin must be inited inside this OnInitialized() function.
 		if Server and not HasMixin(self, "MapBlip") then
 			InitMixin(self, MapBlipMixin)
 		end
@@ -162,7 +162,7 @@ end
 
 
 if Server then
-    // set spawn active when getting attacked
+    -- set spawn active when getting attacked
     function NpcManagerTunnel:OnTakeDamage(damage, attacker, doer, point)
         if not self.active and not self.activatedAfterDamage then
             self:OnLogicTrigger(attacker)

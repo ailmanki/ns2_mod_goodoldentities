@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// MapChange.lua
-// Base entity for MapChange things
+-- MapChange.lua
+-- Base entity for MapChange things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -35,7 +35,7 @@ function MapChange:OnLogicTrigger()
         local _, _, filename = string.find(self.level, "maps/(.*).level")
         local mapName = string.lower(filename)
         
-        // get mods
+        -- get mods
         local mods = {}
         for s = 1, Server.GetNumActiveMods() do     
             table.insert(mods, Server.GetActiveModId(s))

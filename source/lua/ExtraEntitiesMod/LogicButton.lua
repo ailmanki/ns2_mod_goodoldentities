@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicButton.lua
-// Base entity for LogicButton things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicButton.lua
+-- Base entity for LogicButton things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/ScaledModelMixin.lua")
@@ -98,19 +98,19 @@ function LogicButton:OnUse(player, elapsedTime, useAttachPoint, usePoint, useSuc
             if teamOk then
                 local typeOk = false
                 
-                if self.teamType == 0 or self.teamType == nil then           // triggers all the time
+                if self.teamType == 0 or self.teamType == nil then           -- triggers all the time
                     typeOk = true                
-                elseif self.teamType == 1 then              // trigger once per player
+                elseif self.teamType == 1 then              -- trigger once per player
                     local playerId = player:GetId()
                     if not table.contains(self.triggerPlayerList, playerId) then
                         typeOk = true
                         table.insert(self.triggerPlayerList, playerId)                
                     end
-                elseif self.teamType == 2 then              // trigger only once 
+                elseif self.teamType == 2 then              -- trigger only once
                     typeOk = not self.triggered
                     self.triggered = true
-                elseif self.teamType == 3 then              // trigger only once per SteamId
-                    // just ignore npcs here
+                elseif self.teamType == 3 then              -- trigger only once per SteamId
+                    -- just ignore npcs here
                     if player.isaNpc then
                         typeOk = true
                     else

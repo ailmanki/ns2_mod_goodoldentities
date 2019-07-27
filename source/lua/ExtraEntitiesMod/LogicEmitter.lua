@@ -1,16 +1,16 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicEmitter.lua
-// Entity for mappers to create teleporters
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicEmitter.lua
+-- Entity for mappers to create teleporters
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/Mixins/SignalEmitterMixin.lua")
 
-// changed it to ScriptActor so it can be called from the "mappostload" function 
+-- changed it to ScriptActor so it can be called from the "mappostload" function
 class 'LogicEmitter' (ScriptActor)
 
 LogicEmitter.kMapName = "logic_emitter"

@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicCounter.lua
-// Base entity for LogicCounter things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicCounter.lua
+-- Base entity for LogicCounter things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

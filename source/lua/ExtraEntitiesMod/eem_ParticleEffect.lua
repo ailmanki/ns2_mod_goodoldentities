@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 
 local networkVars =
@@ -14,7 +14,7 @@ local networkVars =
 if Server then
 
     local function EmitParticleEffect(self)
-        // dont kill it if its endless or loop
+        -- dont kill it if its endless or loop
         local effect = Shared.CreateEffect(nil, self.cinematicName, nil, self:GetCoords())
         effect.repeatStyle = self.repeatStyle
         effect.startsOnMessage = self.startsOnMessage

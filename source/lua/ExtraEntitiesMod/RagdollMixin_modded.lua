@@ -2,7 +2,7 @@
 
 if Server then
 
-    // to fix a bug where dead physic bodys where still there
+    -- to fix a bug where dead physic bodys where still there
     local originalRagdollMixinOnTag = RagdollMixin.OnTag
     function RagdollMixin:OnTag(tagName)
     

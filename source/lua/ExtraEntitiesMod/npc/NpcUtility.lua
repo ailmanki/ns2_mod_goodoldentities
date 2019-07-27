@@ -1,13 +1,13 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 Script.Load("lua/ExtraEntitiesMod/npc/NpcQueueManager.lua")
 
-// list that includes every npc
+-- list that includes every npc
 kNpcList = {}
 kMaxNpcs = 28
 kMaxNpcsSameTime = 4
@@ -17,30 +17,30 @@ kSpawnedNpcs = 0
 kQueueManager = nil
 
 
-// only take targets from mates that near that distance
+-- only take targets from mates that near that distance
 kSwarmLogicMaxDistance = 20
 kSwarmLogicMaxTime = 6
 kSwarmLogicTargets = {}
 
-// table for team 1 and 2
+-- table for team 1 and 2
 kSwarmLogicTargets[1] = {}
 kSwarmLogicTargets[2] = {}
 kSwarmLogicMaxListEntrys = 20
 
-// if nearby mates already got a target, use the same
+-- if nearby mates already got a target, use the same
 function NpcUtility_AcquireTarget(self)
 
     local teamNumber = self:GetTeamNumber()
     local origin = self:GetOrigin()
     local target = nil
     
-    // first check if we find a valid target in the list (maybe somebody has searched targets secs ago
+    -- first check if we find a valid target in the list (maybe somebody has searched targets secs ago
     
     if #kSwarmLogicTargets[teamNumber] > 0 then
         local deleteEntry = false
         for i, entry in ipairs(kSwarmLogicTargets[teamNumber]) do
 
-            // don't take targets that are to old 
+            -- don't take targets that are to old
             if (Shared.GetTime() - entry.time) < kSwarmLogicMaxTime then
                 if (entry.origin - origin):GetLengthXZ() < kSwarmLogicMaxDistance then
                     local oldTarget = Shared.GetEntity(entry.target)
@@ -56,7 +56,7 @@ function NpcUtility_AcquireTarget(self)
             end
             
             if deleteEntry then
-                // delete him from the table
+                -- delete him from the table
                  table.remove(kSwarmLogicTargets[teamNumber], i)
                  i = i - 1
                  deleteEntry = false
@@ -65,7 +65,7 @@ function NpcUtility_AcquireTarget(self)
         end    
     end
     
-    // if we got no target, search one
+    -- if we got no target, search one
     if not target then
         target = self.targetSelector:AcquireTarget()     
     end
@@ -79,13 +79,13 @@ function NpcUtility_AcquireTarget(self)
 end
 
 
-// tell our members we're getting attacked
+-- tell our members we're getting attacked
 function NpcUtility_InformTeam(self, attacker)
     local origin = self:GetOrigin()
     local teamNumber = self:GetTeamNumber()
     
     for _, player in ipairs(GetEntitiesWithMixinForTeamWithinRange("Npc", teamNumber, origin, kSwarmLogicMaxDistance)) do
-        // give all team members the order to attack the same target
+        -- give all team members the order to attack the same target
         local target = nil
         if player.target then 
             target = player:GetTarget()
@@ -97,14 +97,14 @@ function NpcUtility_InformTeam(self, attacker)
         end        
     end 
     
-    // save the target in the targets list
+    -- save the target in the targets list
     table.insert(kSwarmLogicTargets[teamNumber], {
                         target = attacker:GetId(),
                         origin = origin,
                         time = Shared.GetTime()
                     })
                     
-    // out of list, delete it
+    -- out of list, delete it
     if #kSwarmLogicTargets[teamNumber] >= kSwarmLogicMaxListEntrys then
         table.remove(kSwarmLogicTargets[teamNumber], 1)
     end
@@ -119,10 +119,10 @@ function NpcUtility_GetClearSpawn(origin, className)
     if techId  then
          extents = LookupTechData(techId , kTechDataMaxExtents) or  extents 
     end
-    // origin of entity is on ground, so make it higher
+    -- origin of entity is on ground, so make it higher
     local position = origin
     if not GetHasRoomForCapsule(extents, origin , CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterAll()) then
-        // search clear spawn pos
+        -- search clear spawn pos
         for index = 1, 100 do
             randomSpawn = GetRandomSpawnForCapsule(extents.y, extents.x , origin , 1, 5, EntityFilterAll())
             if randomSpawn then
@@ -151,7 +151,7 @@ function NpcUtility_Spawn(origin, className, values, waypoint)
         if values.origin then      
             local entity = Server.CreateEntity(className, values)
             entity:DropToFloor()
-            // init the xp mixin for the new npc
+            -- init the xp mixin for the new npc
             InitMixin(entity, NpcMixin)	
             if waypoint then
                 waypoint:OnLogicTrigger(entity)
@@ -212,7 +212,7 @@ if Server then
             end
             
             if player then
-                // trace along players zAxis and spawn the item there
+                -- trace along players zAxis and spawn the item there
                 local startPoint = player:GetEyePos()
                 local endPoint = startPoint + player:GetViewCoords().zAxis * 100
                 
@@ -270,9 +270,9 @@ if Server then
         local origin = GetGamerules():GetTeam1():GetInitialTechPoint():GetOrigin()
         local amount = 1
 	
-		// Spawn one of each NPC.
-		// Make them fight each other. 
-		// This ends up testing most of the other systems :]
+		-- Spawn one of each NPC.
+		-- Make them fight each other.
+		-- This ends up testing most of the other systems :]
 		local waitTime = 1
 		local waitTimeInterval = 0.25
 		for team = 1,2,1 do
@@ -297,7 +297,7 @@ if Server then
 			TestSpawnNpc(origin, className, values, team)
 		end
 		
-		// Run some other tests.
+		-- Run some other tests.
 
 		Shared.Message("Testing Complete")
 		
@@ -305,7 +305,7 @@ if Server then
 	
 	Event.Hook("Console_testnpcs", OnConsoleTestNpcs)
 	
-	// this works without cheats to look how many npcs there are
+	-- this works without cheats to look how many npcs there are
 	function OnConsoleShowNpcs(client)
 	
 	    if not lastTimeShowed or Shared.GetTime() - lastTimeShowed > 2 then

@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicCinematic.lua
-// Base entity for LogicCinematic things
+-- LogicCinematic.lua
+-- Base entity for LogicCinematic things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -106,7 +106,7 @@ if Client then
                             player:GetViewModelEntity():SetIsVisible(false)
                         end       
                         player.countingDown = true
-                        // Clear game effects on player
+                        -- Clear game effects on player
                         player:ClearGameEffects() 
                    end
                    
@@ -143,7 +143,7 @@ if Client then
             SetMoveInputBlocked(false)
             player.countingDown = false
             
-            // copied from OnLocalPlayerChanged(), only way I found to do this
+            -- copied from OnLocalPlayerChanged(), only way I found to do this
             ClientUI.EvaluateUIVisibility(player)
             ClientResources.EvaluateResourceVisibility(player)
 

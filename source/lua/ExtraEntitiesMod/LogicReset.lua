@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// LogicReset.lua
-// Base entity for LogicReset things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- LogicReset.lua
+-- Base entity for LogicReset things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 

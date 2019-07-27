@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// modified from GuiExploreHint
+-- modified from GuiExploreHint
 
 
 Script.Load("lua/GUIScript.lua")
@@ -61,14 +61,14 @@ function GUIDialogue:Initialize()
     self.background:SetSize(Vector(Client.GetScreenWidth(), Client.GetScreenHeight(), 0))
     self.background:SetAnchor(GUIItem.Left, GUIItem.Top)
     self.background:SetColor(Color(0, 0, 0, 0))
-    // 1 above main menu,    
+    -- 1 above main menu,
     self.background:SetLayer(kGUILayerMainMenu - 1)
     
-    // Initialise the portrait
+    -- Initialise the portrait
     self:InitializePortrait()
     self:InitializeDialogue()
     
-    // Set up fading
+    -- Set up fading
     self.fadeOutTime = 0
     self.fadeMode = kFadeMode.Normal
     self:SetIsVisible(false)
@@ -180,16 +180,16 @@ function GUIDialogue:SetDialogueText(newText)
 	local newLines = {}
 	self:ClearDialogueTextLines()	
 
-	// Split the buffer into lines, at whitespace
+	-- Split the buffer into lines, at whitespace
 	while string.len(textBuffer) > 0 do
-		// If we can fit the whole buffer on this line, do so and blank all subsequent lines
+		-- If we can fit the whole buffer on this line, do so and blank all subsequent lines
 		if string.len(textBuffer) <= GUIDialogue.kDialogueTextLineChars then
 			table.insert(newLines, textBuffer)
 			textBuffer = ""
 		else
-			// Otherwise, read in to the nearest whole word and then display the rest on the next line.
+			-- Otherwise, read in to the nearest whole word and then display the rest on the next line.
 			local lineBuffer = string.sub(textBuffer, 1, GUIDialogue.kDialogueTextLineChars)
-			// Search backwards and find the nearest whitespace
+			-- Search backwards and find the nearest whitespace
 			local pattern = ".* "
 			local lastSpace = string.len(lineBuffer) - string.find(lineBuffer:reverse(), " ")
 			if lastSpace ~= nil then
@@ -243,7 +243,7 @@ end
 
 function GUIDialogue:Uninitialize()
 
-    // Everything is attached to the background so uninitializing it will destroy all items.
+    -- Everything is attached to the background so uninitializing it will destroy all items.
     if self.background then
         GUI.DestroyItem(self.background)
     end
@@ -295,7 +295,7 @@ end
 
 function GUIDialogue:UpdateFading(deltaTime)
 
-	// Increase/Decrease alpha
+	-- Increase/Decrease alpha
 	local currentAlpha = self:GetAlpha()
 	local targetAlpha = self:GetTargetAlpha()
 	if currentAlpha == targetAlpha then
@@ -306,7 +306,7 @@ function GUIDialogue:UpdateFading(deltaTime)
 		currentAlpha = nextAlpha
 	end
 	
-	// Update visibility
+	-- Update visibility
 	local visible = currentAlpha > GUIDialogue.kMinAlpha
 	self:SetIsVisible(visible)
 

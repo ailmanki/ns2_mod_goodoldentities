@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 Script.Load("lua/Weapons/Weapon.lua")
 
@@ -88,7 +88,7 @@ function PortalGun:GetRange()
     return kRange
 end
 
-// Max degrees that weapon can swing left or right
+-- Max degrees that weapon can swing left or right
 function PortalGun:GetSwingAmount()
     return 10
 end
@@ -109,7 +109,7 @@ function PortalGun:OnDraw(player, previousWeaponMapName)
 
     Weapon.OnDraw(self, player, previousWeaponMapName)
     
-    // Attach weapon to parent's hand
+    -- Attach weapon to parent's hand
     self:SetAttachPoint(Weapon.kHumanAttachPoint)
     
 end
@@ -132,9 +132,9 @@ function PortalGun:OnPrimaryAttack(player)
         self.timeAttackStarted = Shared.GetTime()
     end 
     
-    //if self:GetPrimaryIsBlocking() then
-      //  self.blockingPrimary = true
-    //end
+    --if self:GetPrimaryIsBlocking() then
+      --  self.blockingPrimary = true
+    --end
 
 end
 
@@ -171,12 +171,12 @@ function PortalGun:FirePortal(player, type)
     local viewCoords = player:GetViewCoords()
     local shootCoords = viewAngles:GetCoords()
     
-    // Filter ourself out of the trace so that we don't hit ourselves.
+    -- Filter ourself out of the trace so that we don't hit ourselves.
     local filter = EntityFilterTwo(player, self)
     
     local startPoint = player:GetEyePos() 
     
-    // Calculate spread for each shot, in case they differ    
+    -- Calculate spread for each shot, in case they differ
     local randomAngle  = NetworkRandom() * math.pi * 2
     local randomRadius = NetworkRandom() * NetworkRandom() * math.tan(kSpread)
     local spreadDirection = (viewCoords.xAxis * math.cos(randomAngle) + viewCoords.yAxis * math.sin(randomAngle))
@@ -219,7 +219,7 @@ function PortalGun:FirePortal(player, type)
                 self.portal2Id = portalId
             end            
         
-            // only set the destination if we got 2 portals
+            -- only set the destination if we got 2 portals
             if self.portal1Id and self.portal2Id then
                 local portal1 = Shared.GetEntity(self.portal1Id)
                 local portal2 = Shared.GetEntity(self.portal2Id)
@@ -232,10 +232,10 @@ function PortalGun:FirePortal(player, type)
                 end
             end
             
-            // instant teleport the entity
+            -- instant teleport the entity
             if trace.entity then
                 if trace.entity:isa("Player") then
-                    // set the timeOfLastPhase here so he doesnt get in a loop
+                    -- set the timeOfLastPhase here so he doesnt get in a loop
                     portal:TeleportEntity(trace.entity)
                 end
             end

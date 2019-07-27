@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
-// MapSettings.lua
-// Base entity for MapSettings things
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
+-- MapSettings.lua
+-- Base entity for MapSettings things
 
 
 class 'MapSettings' (Entity)
@@ -29,7 +29,7 @@ function MapSettings:OnInitialized()
     end
     
     if self.fallDmg then
-        //setFalldmg == true
+        --setFalldmg == true
         kFallDamage = true
     end
     

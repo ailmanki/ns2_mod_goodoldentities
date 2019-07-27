@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
-// LogicWaypoint.lua
-// Base entity for LogicWaypoint things
+-- LogicWaypoint.lua
+-- Base entity for LogicWaypoint things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/OrdersMixin.lua")
@@ -52,7 +52,7 @@ function LogicWaypoint:OnLogicTrigger(player)
 		    target = self:GetLogicEntityWithName(self.targetName)
 		    if target and self:GetIsTargetCompleted(target, player) then
 		        self:TriggerOutputs(player)
-		        // if it has still no order, then do just nothing
+		        -- if it has still no order, then do just nothing
 		        if player:GetCurrentOrder() then
 		            return
 		        end
@@ -60,8 +60,8 @@ function LogicWaypoint:OnLogicTrigger(player)
         end
         
         if self.type == 1 then
-            // search near targets as paramater 
-            // if found no targets, just move there
+            -- search near targets as paramater
+            -- if found no targets, just move there
             
             if not target then
 				local targets = GetEntitiesWithMixinWithinRange("Live", self:GetOrigin(), 2)
@@ -80,7 +80,7 @@ function LogicWaypoint:OnLogicTrigger(player)
         elseif self.type == 2 then
 
             if not target then
-                // search near weldable things as paramater 
+                -- search near weldable things as paramater
                 local weldables = GetEntitiesWithinRange("LogicWeldable", self:GetOrigin(), 2)            
                 if weldables and #weldables > 0 then
                     target = weldables[1]

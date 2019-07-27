@@ -1,24 +1,24 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 
 function AnglesToVector(self)            
-    // y -1.57 in game is up in the air
+    -- y -1.57 in game is up in the air
     local angles =  self:GetAngles()
     local origin = self:GetOrigin()
     local directionVector = Vector(0,0,0)
     if angles then
-        // get the direction Vector the pushTrigger should push you                
+        -- get the direction Vector the pushTrigger should push you
         
-        // pitch to vector
+        -- pitch to vector
         directionVector.z = math.cos(angles.pitch)
         directionVector.y = -math.sin(angles.pitch)
         
-        // yaw to vector
+        -- yaw to vector
         if angles.yaw ~= 0 then
             directionVector.x = directionVector.z * math.sin(angles.yaw)                   
             directionVector.z = directionVector.z * math.cos(angles.yaw)                                
@@ -40,21 +40,21 @@ if not Prediction then
          
         self.physicsModel = Shared.CreatePhysicsModel(self.model, true, coords, self) 
         self.physicsModel:SetPhysicsType(PhysicsType.DynamicServer)
-        //self:SetModel(self.model) 
-        //self:SetCoords(coords or Coords())  
+        --self:SetModel(self.model)
+        --self:SetCoords(coords or Coords())
         
         if Client then
-                // Create the visual representation of the prop.
-                // All static props can be instanced.
+                -- Create the visual representation of the prop.
+                -- All static props can be instanced.
                
             self.renderModel = Client.CreateRenderModel(RenderScene.Zone_Default)       
             self.renderModel:SetModel(self.model)            
             self.renderModel:SetCoords(coords)
             self.renderModel:SetIsStatic(false)
-            //self.renderModel:SetIsInstanced(true)  
+            --self.renderModel:SetIsInstanced(true)
             self.renderModel.commAlpha = 1        
            
-            //table.insert(Client.propList, {self.renderModel, self.physicsModel})
+            --table.insert(Client.propList, {self.renderModel, self.physicsModel})
             self.viewModel = {self.renderModel, self.physicsModel}
         end    
     end

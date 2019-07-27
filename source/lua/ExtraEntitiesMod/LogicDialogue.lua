@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicDialogue.lua
-// Base entity for LogicDialogue things
+-- LogicDialogue.lua
+-- Base entity for LogicDialogue things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -38,7 +38,7 @@ function LogicDialogue:OnCreate()
     Entity.OnCreate(self)
 	self:Reset()
 	
-	// Late-precache the sound
+	-- Late-precache the sound
 	if Client then
 		if self.sound ~= nil and self.sound ~= "" then
 			self.soundAsset = PrecacheAsset(self.sound)
@@ -67,7 +67,7 @@ function LogicDialogue:Reset()
 	self.serverTimeStopped = 0
 	self.triggered = false
 	
-	// Stop the GUI hanging around if it is active between round resets.
+	-- Stop the GUI hanging around if it is active between round resets.
 	if g_GUIDialogue then
 		GetGUIManager():DestroyGUIScript(g_GUIDialogue)
 		g_GUIDialogue = nil
@@ -90,7 +90,7 @@ end
 
 function LogicDialogue:OnUpdate(deltaTime)
 	
-	// Client: if timeStarted changes, treat this as a trigger to start the dialogue.
+	-- Client: if timeStarted changes, treat this as a trigger to start the dialogue.
 	if Client and self.timeStarted ~= self.clientTimeStarted then
 		self.clientTimeStarted = self.timeStarted 
 	
@@ -98,7 +98,7 @@ function LogicDialogue:OnUpdate(deltaTime)
 			g_GUIDialogue = GetGUIManager():CreateGUIScript(LogicDialogue.kGUIScript)
 		end
 		
-		// Initialise the GUI part
+		-- Initialise the GUI part
 		if self.showOnScreen then
 			g_GUIDialogue:SetPortraitText(self.characterName)
 			g_GUIDialogue:SetDialogueText(self.text)
@@ -106,19 +106,19 @@ function LogicDialogue:OnUpdate(deltaTime)
 			g_GUIDialogue:StartFadeIn(self.fadeIn)
 		end
 		
-		// Play the sound we precached earlier
+		-- Play the sound we precached earlier
 		if self.soundAsset then
 			StartSoundEffect(self.soundAsset)
 		end
 	end
 	
-	// Server: Trigger logic after the dialogue has played
+	-- Server: Trigger logic after the dialogue has played
 	if Server and self.timeToStop ~= self.serverTimeStopped then
 		self.serverTimeStopped = self.timeToStop
 		self:OnTriggerAction()
 	end
 	
-	// Client: Hide the dialogue GUI after a certain time
+	-- Client: Hide the dialogue GUI after a certain time
 	if Client and self.timeToStop ~= self.clientTimeStopped then
 		if self.timeToStop <= Shared.GetTime() then
 			self.clientTimeStopped = self.timeToStop

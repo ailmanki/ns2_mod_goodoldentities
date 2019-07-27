@@ -1,9 +1,9 @@
-//________________________________
-//
-//   	NS2 Single-Player Mod   
-//  	Made by JimWest, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Single-Player Mod
+--  	Made by JimWest, 2012
+--
+--________________________________
 
 
 Script.Load("lua/Class.lua")
@@ -11,7 +11,7 @@ Script.Load("lua/Class.lua")
 local originalSpitProcessHit
 originalSpitProcessHit = Class_ReplaceMethod( "Spit", "ProcessHit", 
 	function(self, targetHit, surface, normal)
-	    // for npcs, somethings not working so DoDamager here
+	    -- for npcs, somethings not working so DoDamager here
 		/*
         if targetHit and self:GetOwner() ~= targetHit and self:GetOwner().isaNpc then
                     

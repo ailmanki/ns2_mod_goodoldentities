@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
 
-// hook game viz to get the event
+-- hook game viz to get the event
 originalPostGameViz = PostGameViz
 function PostGameViz(msg, targetEntity)
     originalPostGameViz(msg, targetEntity)
@@ -14,7 +14,7 @@ function PostGameViz(msg, targetEntity)
 end
 
 
-// send the event to all listeners
+-- send the event to all listeners
 function SendEventToListeners(msg, targetEntity)
     for _, ent in ientitylist(Shared.GetEntitiesWithClassname("LogicEventListener")) do
         ent:OnEvent(msg, targetEntity)

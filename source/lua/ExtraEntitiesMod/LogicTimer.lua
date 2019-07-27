@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicTimer.lua
-// Base entity for LogicTimer things
+-- LogicTimer.lua
+-- Base entity for LogicTimer things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 
@@ -19,7 +19,7 @@ local kDefaultWaitDelay = 10
 
 local networkVars =
 {
-    //output1_id  = "entityid",    
+    --output1_id  = "entityid",
     enabled = "boolean",
     unlockTime = "time",
     showGUI = "boolean",
@@ -49,7 +49,7 @@ end
 
 function LogicTimer:Reset() 
     self.unlockTime = 0
-	// Stop the GUI hanging around if it is active between round resets.
+	-- Stop the GUI hanging around if it is active between round resets.
 	if g_GUITimer then
 		GetGUIManager():DestroyGUIScript(g_GUITimer)
 		g_GUITimer = nil
@@ -96,7 +96,7 @@ end
 
 function LogicTimer:OnTime()
     self:TriggerOutputs()
-    // to reset the timer
+    -- to reset the timer
     if self.onTimeAction == 0 or self.onTimeAction == nil then
         self.enabled = false
         self.unlockTime = nil

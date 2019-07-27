@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 Combat Mod     
-//	Made by JimWest and MCMLXXXIV, 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 Combat Mod
+--	Made by JimWest and MCMLXXXIV, 2012
+--
+--________________________________
 
-// GUILogicTimer.lua
+-- GUILogicTimer.lua
 
 Script.Load("lua/NS2Utility.lua")
 
@@ -57,7 +57,7 @@ function GUILogicTimer:Initialize()
 	
 	self.timers = {}
     
-	// Used for Global Offset
+	-- Used for Global Offset
 	self.background = self:CreateAnimatedGraphicItem()
     self.background:SetIsScaling(false)
     self.background:SetSize( Vector(Client.GetScreenWidth(), Client.GetScreenHeight(), 0) )
@@ -66,7 +66,7 @@ function GUILogicTimer:Initialize()
     self.background:SetLayer(kGUILayerPlayerHUDBackground)
     self.background:SetColor( Color(1, 1, 1, 0) )
 	
-    // Timer display background
+    -- Timer display background
     self.timerBackground = self:CreateAnimatedGraphicItem()
     self.timerBackground:SetSize( Vector(GUILogicTimer.kBackgroundWidth, GUILogicTimer.kBackgroundHeight, 0) )
     self.timerBackground:SetPosition(Vector(GUILogicTimer.kBackgroundOffsetX - (GUILogicTimer.kBackgroundWidth / 2), GUILogicTimer.kBackgroundOffsetY, 0))
@@ -77,7 +77,7 @@ function GUILogicTimer:Initialize()
 	self.timerBackground:SetColor( GUILogicTimer.kBackgroundColor )
 	self.timerBackground:SetIsVisible(false)
 	
-	// Time remaining
+	-- Time remaining
     self.timeRemainingText = self:CreateAnimatedTextItem()
     self.timeRemainingText:SetAnchor(GUIItem.Middle, GUIItem.Center)
     self.timeRemainingText:SetPosition(GUILogicTimer.kTimeOffset)
@@ -142,7 +142,7 @@ function GUILogicTimer:SetEndTime(timerId, newTime)
     end
 end
 
-// Gets the time in the format "mm:ss:ms"
+-- Gets the time in the format "mm:ss:ms"
 local function GetTimeDigital(timeInSeconds, showMinutes, showMilliseconds)
 
 	local timeLeftText = ""
@@ -170,7 +170,7 @@ local function GetTimeDigital(timeInSeconds, showMinutes, showMilliseconds)
 		timeLeftText = timeLeftText .. timeLeftSeconds
 	end
 	
-	// Disable milliseconds by default. They are *really* annoying.
+	-- Disable milliseconds by default. They are *really* annoying.
 	if showMilliseconds then
 		timeLeftText = timeLeftText .. ":"
 	
@@ -189,7 +189,7 @@ end
 function GUILogicTimer:GetTimeRemainingDigital()
 	local timer = self:GetTimer(timerId)
 	local timeRemaining = "-"
-	// for Debug, just 1st timer
+	-- for Debug, just 1st timer
 	if (#self.timers > 0) then
 	    timer = self.timers[1]
 	end
@@ -207,7 +207,7 @@ function GUILogicTimer:Update(deltaTime)
 
     local player = Client.GetLocalPlayer()
 	
-	// Alter the display based on team, status.
+	-- Alter the display based on team, status.
 	local newTeam = false
 	if (self.playerTeam ~= GetTeamType()) then
 		self.playerTeam = GetTeamType()

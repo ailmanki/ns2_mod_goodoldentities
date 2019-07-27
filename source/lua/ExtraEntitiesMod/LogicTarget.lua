@@ -1,11 +1,11 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// modifed from the original target.lua created by  Max McGuire 
+-- modifed from the original target.lua created by  Max McGuire
 
 Script.Load("lua/ScriptActor.lua")
 Script.Load("lua/Mixins/ModelMixin.lua")
@@ -44,7 +44,7 @@ function LogicTarget:OnInitialized()
         self:SetModel( self.model )
     end
 
-    // Team number set by ScriptActor:OnLoad
+    -- Team number set by ScriptActor:OnLoad
 
     self.health = tonumber(self.health)    
     self.initialHealth = self.health
@@ -85,7 +85,7 @@ if (Server) then
   
     function LogicTarget:OnKill(damage, attacker, doer, point, direction)
     
-        // Create a rag doll.
+        -- Create a rag doll.
         self:SetPhysicsType(PhysicsType.Dynamic)
         self:SetPhysicsGroup(PhysicsGroup.RagdollGroup)
         self:TriggerOutputs(player)  
@@ -99,9 +99,9 @@ if (Client) then
 
     function LogicTarget:OnTakeDamage(damage, attacker, doer, point)     
        
-        // Push the physics model around on the client when we shoot it.
-        // This won't affect the model on other clients, but it's just for
-        // show anyway (doesn't affect player movement).
+        -- Push the physics model around on the client when we shoot it.
+        -- This won't affect the model on other clients, but it's just for
+        -- show anyway (doesn't affect player movement).
         if (self.physicsModel ~= nil) then
             local direction = Vector(0, 1, 0)
             if doer and point then

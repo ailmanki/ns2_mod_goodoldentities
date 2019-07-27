@@ -1,16 +1,16 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// FuncMoveable.lua
-// Base entity for FuncMoveable things
+-- FuncMoveable.lua
+-- Base entity for FuncMoveable things
 
 Script.Load("lua/ScriptActor.lua")
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
-// needed for the MoveToTarget Command
+-- needed for the MoveToTarget Command
 Script.Load("lua/PathingMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/TrainMixin.lua")
 Script.Load("lua/ExtraEntitiesMod/ScaledModelMixin.lua")
@@ -36,7 +36,7 @@ AddMixinNetworkVars(TrainMixin, networkVars)
 
 local function UpdateAutoOpen(self, timePassed)
 
-    // If any players are around, have door open if possible, otherwise close it
+    -- If any players are around, have door open if possible, otherwise close it
     
     if self.enabled then
     
@@ -122,7 +122,7 @@ function FuncMoveable:OnUpdate(deltaTime)
     
 end
 
-// called from OnUpdate when self.driving = true
+-- called from OnUpdate when self.driving = true
 function FuncMoveable:UpdatePosition(deltaTime)
    
     if self.driving then
@@ -133,7 +133,7 @@ function FuncMoveable:UpdatePosition(deltaTime)
             self:CheckBlocking()
             local done = self:TrainMoveToTarget(PhysicsMask.All, self.nextWaypoint, self:GetSpeed(), deltaTime, false)
             if done then
-                //Print("New Position: " .. self:GetOrigin())
+                --Print("New Position: " .. self:GetOrigin())
                 self.driving = false
                 self.nextWaypoint = nil
             end
@@ -146,14 +146,14 @@ end
 
 
 function FuncMoveable:CheckBlocking()
-    // kill entities that blocks us
-    //local startPoint = self:GetOrigin()    
+    -- kill entities that blocks us
+    --local startPoint = self:GetOrigin()
     local coords = self:GetCoords()
     local middle = coords.origin + (coords.yAxis / 2)
     
     local endPoint = self.nextWaypoint or self:GetNextWaypoint() 
     local extents = self.scale or self:GetExtents()  
-    //local trace = self.physicsModel:Trace(CollisionRep.Move, CollisionRep.Move, PhysicsMask.Movement)  
+    --local trace = self.physicsModel:Trace(CollisionRep.Move, CollisionRep.Move, PhysicsMask.Movement)
     local trace = Shared.TraceRay(middle, endPoint, CollisionRep.Move, PhysicsMask.All, EntityFilterOne(self))
     if trace.entity then
         if HasMixin(trace.entity, "Live") then
@@ -194,7 +194,7 @@ function FuncMoveable:CreatePath(onUpdate)
     elseif  self.direction == 2 then
         moveVector.x = directionVector.z * -extents.x 
         moveVector.z = directionVector.x * extents.x 
-        //directionVector 
+        --directionVector
     elseif  self.direction == 3 then
         moveVector.x = directionVector.z * extents.x 
         moveVector.z = directionVector.x * -extents.x     

@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// LogicPowerPointListener.lua
-// Base entity for LogicPowerPointListener things
+-- LogicPowerPointListener.lua
+-- Base entity for LogicPowerPointListener things
 
 Script.Load("lua/ExtraEntitiesMod/LogicMixin.lua")
 Script.Load("lua/PowerConsumerMixin.lua")
@@ -34,7 +34,7 @@ function LogicPowerPointListener:OnInitialized()
     if Server then
         InitMixin(self, LogicMixin)
         Print(self:GetLocationName())
-        //SetLocationName
+        --SetLocationName
     end
     
 end

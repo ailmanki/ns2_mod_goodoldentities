@@ -1,12 +1,12 @@
-//________________________________
-//
-//   	NS2 CustomEntitesMod   
-//	Made by JimWest 2012
-//
-//________________________________
+--________________________________
+--
+--   	NS2 CustomEntitesMod
+--	Made by JimWest 2012
+--
+--________________________________
 
-// at this point, all entities are loaded, so best way to search others (for train)
-// only for server
+-- at this point, all entities are loaded, so best way to search others (for train)
+-- only for server
 
 if Server then
 
