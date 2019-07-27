@@ -1,0 +1,7 @@
+modEntry = [[
+	Client: lua/oldentities/eem_Client.lua,
+	Server: lua/oldentities/eem_Server.lua,
+	Predict: lua/oldentities/eem_Predict.lua,
+	Shared: lua/oldentities/eem_Shared.lua,
+	Priority: 3
+]]
