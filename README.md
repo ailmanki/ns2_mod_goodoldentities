@@ -1,4 +1,7 @@
 # Good old entities
+
+![Screenshot from the demo map](preview.jpg "Good old entities")
+
 *A mod for Natural Selection 2*
 
 A fork of [ExtraEntitiesMod](steamcommunity.com/sharedfiles/filedetails/?id=107977815) initially for ns2_co_portals.
