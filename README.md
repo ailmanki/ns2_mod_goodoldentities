@@ -3,6 +3,7 @@
 
 A fork of [ExtraEntitiesMod](steamcommunity.com/sharedfiles/filedetails/?id=107977815) initially for ns2_co_portals.
 This replaces teleport_trigger with a compatible one for pre [Build 261 (December 3, 2013)](https://wiki.naturalselection2.com/view/Patches/Build_261#SDK)  maps which used ExtraEntitiesMod.
+
 modid: 6C517342
 
 ## Compatible maps
