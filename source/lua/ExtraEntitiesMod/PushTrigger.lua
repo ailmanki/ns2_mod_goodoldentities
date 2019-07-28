@@ -39,7 +39,7 @@ local function PushEntity(self, entity)
                
             end 
             
-            entity.pushTime = -1
+            entity.pushTime = 134217
             
             velocity = self.pushDirection * force 
             entity:SetVelocity(velocity)

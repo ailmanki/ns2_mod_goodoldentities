@@ -728,35 +728,35 @@
             <choice label="Electric" value="4"/>
         </parameter>
     </class>
+    <!--
+        <class name="teleport_trigger">
 
-    <class name="teleport_trigger">
-    
-        <model>
-            <file>models/system/editor/teleport_trigger.model</file>
-            <scale>scale</scale>
-        </model>
+            <model>
+                <file>models/system/editor/teleport_trigger.model</file>
+                <scale>scale</scale>
+            </model>
 
-        <size>
-            <scale>scale</scale>
-        </size>
-        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>
-        <parameter name="name" type="string" label="Name" help="Name of trigger which can be referenced by other entities" />
+            <size>
+                <scale>scale</scale>
+            </size>
+            <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>
+            <parameter name="name" type="string" label="Name" help="Name of trigger which can be referenced by other entities" />
 
-        <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Place a teleport_destination entity with the same ID used." default="0"/>
+            <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Place a teleport_destination entity with the same ID used." default="0"/>
 
-    </class>
+        </class>
 
-    <class name="teleport_destination">
+        <class name="teleport_destination">
 
-        <model>
-            <file>models/system/editor/waypoint.model</file>
-        </model>
+            <model>
+                <file>models/system/editor/waypoint.model</file>
+            </model>
 
-        <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Use same ID used for teleport_trigger to connect them." default="0"/>
+            <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Use same ID used for teleport_trigger to connect them." default="0"/>
 
-    </class>
-
-    <!-- IP attach range circle -->
+        </class>
+    -->
+        <!-- IP attach range circle -->
     <class name="ip_attach_range" placeable="true">
 
         <model>

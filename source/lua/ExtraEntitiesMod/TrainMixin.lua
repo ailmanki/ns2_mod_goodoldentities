@@ -88,9 +88,7 @@ function TrainMixin:OnInitialized()
 
 end
 
-function TrainMixin:GetControllerPhysicsGroup()
-    return PhysicsGroup.PlayerControllersGroup
-end
+
 function TrainMixin:OnUpdate(deltaTime)  
     
     if Server then 
@@ -107,6 +105,11 @@ function TrainMixin:OnUpdate(deltaTime)
         end  
     end
     
+end
+
+-- Required by ControllerMixin
+function TrainMixin:GetControllerPhysicsGroup()
+    return PhysicsGroup.PlayerControllersGroup
 end
 
 -- Required by ControllerMixin.
@@ -219,10 +222,10 @@ function TrainMixin:MovePlayersInTrigger(deltaTime)
                 newOrigin.x = trainOrigin.x + (math.sin(degrees) * (entOrigin.z - trainOrigin.z) +  math.cos(degrees) * (entOrigin.x - trainOrigin.x))
 
                 entityAngles.yaw = entityAngles.yaw + selfDeltaAngles.yaw
-                local coords = Coords.GetLookIn(newOrigin, self:GetAngles():GetCoords().zAxis)
+                --local coords = Coords.GetLookIn(newOrigin, self:GetAngles():GetCoords().zAxis)
                 --TransformPlayerCoordsForTrain(entity, entity:GetCoords(), coords)
                 entity:SetOrigin(newOrigin  + self:GetMovementVector())
-                entity.pushTime = -1
+                entity.pushTime = 134217
             end
         end
     end

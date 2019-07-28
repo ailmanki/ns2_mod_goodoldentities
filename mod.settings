@@ -1,7 +1,18 @@
 name        = "Good old entities"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[A fork of ExtraEntitiesMod for ns2_co_portals.]=]
+description = [=[[h1][b]Good old entities[/b][/h1]
+A fork of [url=steamcommunity.com/sharedfiles/filedetails/?id=107977815]ExtraEntitiesMod[/url] initially for ns2_co_portals.
+This replaces teleport_trigger with a compatible one for pre [url=wiki.naturalselection2.com/view/Patches/Build_261#SDK]Build 261 (December 3, 2013)[/url]  maps which used ExtraEntitiesMod.
+modid: 6C517342
+
+[h1]Compatible maps[/h1]
+[url=steamcommunity.com/sharedfiles/filedetails/?id=144443947]ns2_co_chuteout[/url]
+[url=steamcommunity.com/sharedfiles/filedetails/?id=148929224]ns2_co_portals[/url] 
+
+[h1]Mapping[/h1]
+Included is the map ns2_eem_test_level which demonstrates the entities. For the Spark Editor there is a updated editor_setup.xml. This editor_setup.xml has a different set of entity definition for teleport_trigger, Build 261 introduced teleport_destination and teleport_trigger entities. Saving new maps with this editor_setup.xml will break teleporters.
+]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
