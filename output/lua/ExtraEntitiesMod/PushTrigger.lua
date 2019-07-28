@@ -69,7 +69,7 @@ function PushTrigger:OnInitialized()
     if Server then
         InitMixin(self, LogicMixin)   
         self.pushDirection = AnglesToVector(self)
-        self:SetUpdates(true)  
+		self:SetUpdates(true, kRealTimeUpdateRate)
     end
     self:SetTriggerCollisionEnabled(true) 
     
@@ -99,4 +99,4 @@ function PushTrigger:OnLogicTrigger()
 end
 
 
-Shared.LinkClassToMap("PushTrigger", PushTrigger.kMapName, networkVars)
+Shared.LinkClassToMap("PushTrigger", PushTrigger.kMapName, networkVars, true)
