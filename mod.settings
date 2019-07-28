@@ -5,4 +5,4 @@ description = [=[A fork of ExtraEntitiesMod for ns2_co_portals.]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
-publish_id = "6c4c6a3d"
+publish_id = "6c517342"

@@ -11,7 +11,7 @@ local function AddMinimapBlipType(blipType)
 	
 	-- We have to reconstruct the kTechId enum to add values.
 	local enumTable = {}
-	for index, value in ipairs(kMinimapBlipType) do
+	for _, value in ipairs(kMinimapBlipType) do
 		table.insert(enumTable, value)
 	end
 	

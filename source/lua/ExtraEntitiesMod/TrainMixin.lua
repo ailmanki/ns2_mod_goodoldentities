@@ -54,7 +54,7 @@ local function TransformPlayerCoordsForTrain(player, srcCoords, dstCoords)
     
     -- Redirect player velocity relative to gates
     local invSrcCoords = srcCoords:GetInverse()   
-    local viewCoords = dstCoords * (invSrcCoords * viewCoords)
+    viewCoords = dstCoords * (invSrcCoords * viewCoords)
     local viewAngles = Angles()
     viewAngles:BuildFromCoords(viewCoords)
     
@@ -76,18 +76,21 @@ function TrainMixin:OnInitialized()
     -- Save origin, angles, etc. so we can restore on reset
     self.savedOrigin = Vector(self:GetOrigin())
     self.savedAngles = Angles(self:GetAngles())
-        
     if Server then
-        InitMixin(self, ControllerMixin)
-        self:CreateController(PhysicsGroup.WhipGroup)
+    InitMixin(self, ControllerMixin)
+        self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
+       -- self:CreateController(PhysicsGroup.WhipGroup)
         -- set a box so it can be triggered, use the trigger scale from the mapEditor
         if self:GetPushPlayers() then
             self:MoveTrigger()        
         end        
     end
-    
+
 end
 
+function TrainMixin:GetControllerPhysicsGroup()
+    return PhysicsGroup.PlayerControllersGroup
+end
 function TrainMixin:OnUpdate(deltaTime)  
     
     if Server then 
@@ -100,7 +103,7 @@ function TrainMixin:OnUpdate(deltaTime)
                 self:MovePlayersInTrigger(deltaTime)
 
             end
-            self:UpdateControllerFromEntity()
+            --self:UpdateControllerFromEntity()
         end  
     end
     

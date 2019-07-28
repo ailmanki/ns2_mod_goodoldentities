@@ -83,7 +83,9 @@ function FuncMoveable:OnCreate()
     InitMixin(self, ModelMixin)
     InitMixin(self, PathingMixin)
     InitMixin(self, TrainMixin)
-    
+
+    self.physicsGroup = PhysicsGroup.WhipGroup
+    self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
 end
 
 function FuncMoveable:OnInitialized()
@@ -167,13 +169,15 @@ function FuncMoveable:IsOpen()
     return self:GetOrigin() ~= self.savedOrigin
 end
 
-/* will create a path so the train will know the next points
+--[[
+ will create a path so the train will know the next points
 case self.direction:
 "Up" value="0"
 "Down" value="1"
 "Left" value="2"
 "Right" value="3"
-*/
+]]
+
 function FuncMoveable:CreatePath(onUpdate)
 
     local extents = self.scale or Vector(1,1,1)

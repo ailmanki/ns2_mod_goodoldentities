@@ -4,7 +4,6 @@
 --	Made by JimWest 2012
 --
 --________________________________
-
 local overrideOnClientDisconnected = OnClientDisconnected
 function OnClientDisconnected(reason)    
     if self.gEemToolTipScript then
@@ -24,6 +23,20 @@ overridePlayerOnInitLocalClient = Class_ReplaceMethod( "Player", "OnInitLocalCli
 	end
 )
 
+local function GetEntitiesWithinRangeInView(className, range, player)
+
+    PROFILE("Entity:GetEntitiesWithinRangeInView")
+
+    assert(type(className) == "string")
+    assert(type(range) == "number")
+    assert(player ~= nil)
+
+    local function withinViewFilter(entity)
+        return GetCanSeeEntity(player, entity)
+    end
+
+    return Shared.GetEntitiesWithTagInRange("class:" .. className, player:GetOrigin(), range, withinViewFilter)
+end
 
 local overridePlayerUpdateClientEffects
 overridePlayerUpdateClientEffects = Class_ReplaceMethod( "Player", "UpdateClientEffects",
@@ -50,6 +63,7 @@ overridePlayerUpdateClientEffects = Class_ReplaceMethod( "Player", "UpdateClient
 )
 
 -- no noname for bots
+--[[
 local originalPlayerGetName
 originalPlayerGetName = Class_ReplaceMethod( "Player", "GetName",
 
@@ -65,3 +79,4 @@ originalPlayerGetName = Class_ReplaceMethod( "Player", "GetName",
         
     end
 )
+]]

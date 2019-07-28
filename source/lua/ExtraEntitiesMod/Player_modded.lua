@@ -17,10 +17,12 @@ local networkVars =
 }
 
 
+--[[
 -- Modifications for the npc
 -- every player needs order mixin so we can give them orders etc
 Script.Load("lua/OrdersMixin.lua")
 AddMixinNetworkVars(OrdersMixin, networkVars)
+]]
 
 -- override for the gravity trigger
 function Player:AdjustGravityForceOverride(gravity)
@@ -32,7 +34,7 @@ function Player:AdjustGravityForceOverride(gravity)
     end
     return gravity
 end
-
+--[[
 local overridePlayerOnInitialized = Player.OnInitialized
 function Player:OnInitialized()
     overridePlayerOnInitialized(self)
@@ -67,14 +69,14 @@ if Server then
 			RagdollMixin.OnKill(self, attacker, doer, point, direction)
         end
     end
-    
-    
+
+
     -- cheap trick to get rid of an error that appears when npcs are shooting before client is there
     Player.hitRegEnabled = false
 
     local originalPlayerGetClient
-    originalPlayerGetClient = Class_ReplaceMethod( "Player", "GetClient", 
-        function(self)     
+    originalPlayerGetClient = Class_ReplaceMethod( "Player", "GetClient",
+        function(self)
             return self.client or self
         end
     )
@@ -83,16 +85,17 @@ elseif Client then
 
     -- to fix the bug when theres no minimap frame
     function Player:ShowMap(showMap, showBig, forceReset)
-        
-        if ClientUI.GetScript("GUIMinimapFrame") then        
+
+        if ClientUI.GetScript("GUIMinimapFrame") then
             self.minimapVisible = showMap and showBig
             ClientUI.GetScript("GUIMinimapFrame"):ShowMap(showMap)
             ClientUI.GetScript("GUIMinimapFrame"):SetBackgroundMode((showBig and GUIMinimapFrame.kModeBig) or GUIMinimapFrame.kModeMini, forceReset)
         end
-        
+
     end
 
 end
+]]
 
 
 Class_Reload("Player", networkVars)
