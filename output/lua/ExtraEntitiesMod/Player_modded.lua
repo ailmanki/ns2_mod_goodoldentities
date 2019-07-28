@@ -97,5 +97,19 @@ elseif Client then
 end
 ]]
 
+if Predict then
+
+	local oldOnUpdatePlayer = Player.OnUpdatePlayer
+	function Player:OnUpdatePlayer(deltaTime)
+		oldOnUpdatePlayer(self, deltaTime)
+		
+		for index, entity in ipairs (GetEntitiesWithMixin("Train")) do
+			if entity.OnUpdate then
+				entity:OnUpdate(deltaTime)
+			end
+		end
+	end
+
+end
 
 Class_Reload("Player", networkVars)

@@ -46,7 +46,7 @@ function FuncTrain:OnCreate()
     InitMixin(self, PathingMixin)
     InitMixin(self, TrainMixin)
     
-    self:SetUpdates(true)  
+    self:SetUpdates(true, kRealTimeUpdateRate)
     
 end
 
@@ -268,4 +268,4 @@ end
 
 
 
-Shared.LinkClassToMap("FuncTrain", FuncTrain.kMapName, networkVars)
+Shared.LinkClassToMap("FuncTrain", FuncTrain.kMapName, networkVars, true)

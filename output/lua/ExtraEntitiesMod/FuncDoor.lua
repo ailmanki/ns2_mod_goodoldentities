@@ -71,7 +71,7 @@ function FuncDoor:OnInitialized()
     
     if Server then
         InitMixin(self, LogicMixin) 
-        self:SetUpdates(true)
+		self:SetUpdates(true, kRealTimeUpdateRate)
         if self.stayOpen then  
             self.timedCallbacks = {}
         end
@@ -166,4 +166,4 @@ function FuncDoor:OnAdjustModelCoords(modelCoords)
     
 end
 
-Shared.LinkClassToMap("FuncDoor", FuncDoor.kMapName, networkVars)
+Shared.LinkClassToMap("FuncDoor", FuncDoor.kMapName, networkVars, true)
