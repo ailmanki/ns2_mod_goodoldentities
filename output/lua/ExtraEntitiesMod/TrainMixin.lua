@@ -36,6 +36,7 @@ TrainMixin.networkVars =
     driving = "boolean",
     waiting = "boolean",
 	savedOrigin = "vector",
+	vel = "vector"
 }
 
 
@@ -68,6 +69,7 @@ end
 function TrainMixin:__initmixin() 
     self.driving = false
     self.waiting = false
+	self.vel = Vector(0,0,0)
 end
 
 
@@ -78,7 +80,10 @@ function TrainMixin:OnInitialized()
     self.savedAngles = Angles(self:GetAngles())
     if Server then
     InitMixin(self, ControllerMixin)
-        self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
+        
+		self:SetPhysicsGroup(PhysicsGroup.BigStructuresGroup)
+		-- if you set it to whips, onos fall through it!!
+		--self:SetPhysicsGroup(PhysicsGroup.WhipGroup)
        -- self:CreateController(PhysicsGroup.WhipGroup)
         -- set a box so it can be triggered, use the trigger scale from the mapEditor
         if self:GetPushPlayers() then
@@ -86,23 +91,37 @@ function TrainMixin:OnInitialized()
         end        
     end
 
+    if self.OnUpdatePhysics then
+        self:OnUpdatePhysics()
+    end
+	
 end
 
 
 function TrainMixin:OnUpdate(deltaTime)  
     
-    if Server then 
+    if Server then
         if self.driving then
             self:UpdatePosition(deltaTime)
-            self:MoveTrigger()
+            self:MoveTrigger() 
+			self:SetOldOrigin(self:GetOrigin(), deltaTime)
+			if deltaTime and deltaTime > 0 then
+				self.vel = self:GetMovementVector() / deltaTime
+			end
             if not self.waiting  and self:GetPushPlayers() then
-                self:SetOldOrigin(self:GetOrigin())
                 self:SetOldAngles(self:GetAngles())
                 self:MovePlayersInTrigger(deltaTime)
 
             end
             --self:UpdateControllerFromEntity()
-        end  
+        else
+			self.vel = Vector(0,0,0)
+		end
+		
+    end
+	
+    if self.OnUpdatePhysics then
+        self:OnUpdatePhysics()
     end
     
 end
@@ -114,7 +133,7 @@ end
 
 -- Required by ControllerMixin.
 function TrainMixin:GetControllerSize()
-    return GetTraceCapsuleFromExtents(self:GetExtents())    
+    return 0,0 -- GetTraceCapsuleFromExtents(self:GetExtents())    
 end
 
 -- Required by ControllerMixin.
@@ -127,6 +146,7 @@ function TrainMixin:Reset()
 
     -- Restore original origin, angles, etc. as it could have been rag-dolled
     self:SetOrigin(self.savedOrigin)
+	self.oldOrigin = self:GetOrigin()
     self:SetAngles(self.savedAngles)
     self.driving = false
     if self.autoStart then
@@ -139,10 +159,11 @@ function TrainMixin:Reset()
     
     self.movementVector = nil
     self.oldAngles = nil
+	self.vel = Vector(0,0,0)
     
 end
 
-function TrainMixin:SetOldOrigin(origin)
+function TrainMixin:SetOldOrigin(origin, deltaTime)
     -- locally save the old origin
     --Entity.SetOrigin(self, origin)
     if not self.oldOrigin then
@@ -150,9 +171,8 @@ function TrainMixin:SetOldOrigin(origin)
     end
 
     local movementVector = origin - self.oldOrigin
-    if (movementVector.x + movementVector.y + movementVector.z) ~= 0 then
-        self:SetMovementVector(movementVector)  
-    end   
+	self:SetMovementVector(movementVector)  
+	
     self.oldOrigin = self:GetOrigin()  
 end
 
@@ -207,7 +227,7 @@ end
 function TrainMixin:MovePlayersInTrigger(deltaTime)
     for _, entity in ipairs(self:GetEntitiesInTrigger()) do 
         if self.driving and entity~= self then
-            if not entity:GetIsJumping() then
+            if not entity.GetIsJumping or not entity:GetIsJumping() then
                 -- change position when the train is driving
                 local entOrigin = entity:GetOrigin()
                 local trainOrigin = self:GetOrigin()
@@ -224,7 +244,8 @@ function TrainMixin:MovePlayersInTrigger(deltaTime)
                 entityAngles.yaw = entityAngles.yaw + selfDeltaAngles.yaw
                 --local coords = Coords.GetLookIn(newOrigin, self:GetAngles():GetCoords().zAxis)
                 --TransformPlayerCoordsForTrain(entity, entity:GetCoords(), coords)
-                entity:SetOrigin(newOrigin  + self:GetMovementVector())
+                entity:SetOrigin(newOrigin)--  + self:GetMovementVector())
+				
                 entity.pushTime = 134217
             end
         end
@@ -257,6 +278,11 @@ function TrainMixin:MoveTrigger()
         --self.triggerModel = nil
         self.triggerModel:SetCoords(coords)
         self.triggerModel:SetBoneCoords(coords, CoordsArray())
+		
+		if self.OnUpdatePhysics then
+			self:OnUpdatePhysics()
+		end
+		
     else    
         if self.modelIndex then    
 
